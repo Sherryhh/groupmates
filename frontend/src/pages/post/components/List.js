@@ -22,12 +22,7 @@ class List extends PureComponent {
     const columns = [
       {
         title: t`Team Name`,
-        dataIndex: 'title',
-        render: text => (
-          <Ellipsis tooltip length={30}>
-            {text}
-          </Ellipsis>
-        ),
+        dataIndex: 'author',
       },
       {
         title: t`Group Leader`,
