@@ -12,7 +12,7 @@ import Modal from './components/Modal'
 
 @connect(({ user, loading }) => ({ user, loading }))
 class User extends PureComponent {
-  handleRefresh = newQuery => {
+  handleRefresh = newQuery => { //reset
     const { location } = this.props
     const { query, pathname } = location
 
@@ -28,24 +28,24 @@ class User extends PureComponent {
     })
   }
 
-  handleDeleteItems = () => {
-    const { dispatch, user } = this.props
-    const { list, pagination, selectedRowKeys } = user
+  // handleDeleteItems = () => {
+  //   const { dispatch, user } = this.props
+  //   const { list, pagination, selectedRowKeys } = user
 
-    dispatch({
-      type: 'user/multiDelete',
-      payload: {
-        ids: selectedRowKeys,
-      },
-    }).then(() => {
-      this.handleRefresh({
-        page:
-          list.length === selectedRowKeys.length && pagination.current > 1
-            ? pagination.current - 1
-            : pagination.current,
-      })
-    })
-  }
+  //   dispatch({
+  //     type: 'user/multiDelete',
+  //     payload: {
+  //       ids: selectedRowKeys,
+  //     },
+  //   }).then(() => {
+  //     this.handleRefresh({
+  //       page:
+  //         list.length === selectedRowKeys.length && pagination.current > 1
+  //           ? pagination.current - 1
+  //           : pagination.current,
+  //     })
+  //   })
+  // }
 
   get modalProps() {
     const { dispatch, user, loading } = this.props
@@ -91,39 +91,32 @@ class User extends PureComponent {
           pageSize: page.pageSize,
         })
       },
-      onDeleteItem: id => {
-        dispatch({
-          type: 'user/delete',
-          payload: id,
-        }).then(() => {
-          this.handleRefresh({
-            page:
-              list.length === 1 && pagination.current > 1
-                ? pagination.current - 1
-                : pagination.current,
-          })
-        })
+      onHideItem: id => {
+        // dispatch({
+        //   type: 'user/delete',
+        //   payload: id,
+        // }).then(() => {
+        //   this.handleRefresh({
+        //     page:
+        //       list.length === 1 && pagination.current > 1
+        //         ? pagination.current - 1
+        //         : pagination.current,
+        //   })
+        // })
       },
-      onEditItem(item) {
-        dispatch({
-          type: 'user/showModal',
-          payload: {
-            modalType: 'update',
-            currentItem: item,
-          },
-        })
+      onInviteItem(item) {
       },
-      rowSelection: {
-        selectedRowKeys,
-        onChange: keys => {
-          dispatch({
-            type: 'user/updateState',
-            payload: {
-              selectedRowKeys: keys,
-            },
-          })
-        },
-      },
+      // rowSelection: {
+      //   selectedRowKeys,
+      //   onChange: keys => {
+      //     dispatch({
+      //       type: 'user/updateState',
+      //       payload: {
+      //         selectedRowKeys: keys,
+      //       },
+      //     })
+      //   },
+      // },
     }
   }
 
@@ -140,40 +133,23 @@ class User extends PureComponent {
           ...value,
         })
       },
-      onAdd() {
-        dispatch({
-          type: 'user/showModal',
-          payload: {
-            modalType: 'create',
-          },
-        })
+      onSort() {
+        // dispatch({
+        //   type: 'user/showModal',
+        //   payload: {
+        //     modalType: 'create',
+        //   },
+        // })
       },
     }
   }
 
   render() {
     const { user } = this.props
-    const { selectedRowKeys } = user
 
     return (
       <Page inner>
         <Filter {...this.filterProps} />
-        {selectedRowKeys.length > 0 && (
-          <Row style={{ marginBottom: 24, textAlign: 'right', fontSize: 13 }}>
-            <Col>
-              {`Selected ${selectedRowKeys.length} items `}
-              <Popconfirm
-                title="Are you sure delete these items?"
-                placement="left"
-                onConfirm={this.handleDeleteItems}
-              >
-                <Button type="primary" style={{ marginLeft: 8 }}>
-                  Remove
-                </Button>
-              </Popconfirm>
-            </Col>
-          </Row>
-        )}
         <List {...this.listProps} />
         <Modal {...this.modalProps} />
       </Page>
@@ -184,8 +160,8 @@ class User extends PureComponent {
 User.propTypes = {
   user: PropTypes.object,
   location: PropTypes.object,
-  dispatch: PropTypes.func,
-  loading: PropTypes.object,
+  // dispatch: PropTypes.func,
+  // loading: PropTypes.object,
 }
 
 export default User

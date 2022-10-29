@@ -1,20 +1,27 @@
 import React, { PureComponent } from 'react'
-import { Table, Avatar } from 'antd'
+import { Table } from 'antd'
 import { t } from "@lingui/macro"
-import { Ellipsis } from 'components'
+import { Ellipsis, DropOption } from 'components'
 import styles from './List.less'
+import PropTypes from 'prop-types'
 
 class List extends PureComponent {
+  handleMenuClick = (record) => {
+    const { onJoinItem, onLearnItem, onHideItem } = this.props
+    if (e.key === '1') {
+      onJoinItem(record.id)
+    } else if (e.key === '2') {
+      onLearnItem(record.id)
+    } else if (e.key === '3') {
+      onHideItem(record.id)
+    }
+  }
+
   render() {
-    const { ...tableProps } = this.props
+    const { onInviteItem, onJoinItem, onLearnItem, ...tableProps } = this.props
     const columns = [
       {
-        title: t`Image`,
-        dataIndex: 'image',
-        render: text => <Avatar shape="square" src={text} />,
-      },
-      {
-        title: t`Title`,
+        title: t`Team Name`,
         dataIndex: 'title',
         render: text => (
           <Ellipsis tooltip length={30}>
@@ -23,32 +30,31 @@ class List extends PureComponent {
         ),
       },
       {
-        title: t`Author`,
+        title: t`Group Leader`,
         dataIndex: 'author',
       },
       {
-        title: t`Categories`,
+        title: t`Languages`,
         dataIndex: 'categories',
       },
       {
-        title: t`Tags`,
-        dataIndex: 'tags',
-      },
-      {
-        title: t`Visibility`,
-        dataIndex: 'visibility',
-      },
-      {
-        title: t`Comments`,
+        title: t`Looking for...`,
         dataIndex: 'comments',
       },
       {
-        title: t`Views`,
-        dataIndex: 'views',
-      },
-      {
-        title: t`Publish Date`,
-        dataIndex: 'date',
+        title: t`Options`,
+        render: (text, record) => {
+          return (
+            <DropOption
+              onMenuClick={e => this.handleMenuClick(record, e)}
+              menuOptions={[
+                { key: '1', name: t`Ask to Join` },
+                { key: '2', name: t`Learn More` },
+                { key: '3', name: t`Hide this Group` }
+              ]}
+            />
+          )
+        },
       },
     ]
 
@@ -70,4 +76,9 @@ class List extends PureComponent {
   }
 }
 
+List.propTypes = {
+  onJoinItem: PropTypes.func,
+  onHideItem: PropTypes.func,
+  onLearnItem: PropTypes.func,
+}
 export default List

@@ -11,22 +11,27 @@ const { confirm } = Modal
 
 class List extends PureComponent {
   handleMenuClick = (record, e) => {
-    const { onDeleteItem, onEditItem } = this.props
+    const { onInviteItem, onHideItem } = this.props
 
     if (e.key === '1') {
-      onEditItem(record)
-    } else if (e.key === '2') {
       confirm({
-        title: t`Are you sure delete this record?`,
+        title: t`Are you sure to send invitation?`,
         onOk() {
-          onDeleteItem(record.id)
+          onInviteItem(record.id)
+        },
+      })
+    } else if (e.key == '2') {
+      confirm({
+        title: t`Are you sure to hide this person?`,
+        onOk() {
+          onHideItem(record.id)
         },
       })
     }
   }
 
   render() {
-    const { onDeleteItem, onEditItem, ...tableProps } = this.props
+    const { onInviteItem, onHideItem, ...tableProps } = this.props
 
     const columns = [
       {
@@ -44,55 +49,41 @@ class List extends PureComponent {
         render: (text, record) => <Link to={`user/${record.id}`}>{text}</Link>,
       },
       {
-        title: <Trans>NickName</Trans>,
-        dataIndex: 'nickName',
-        key: 'nickName',
+        title: <Trans>Rating</Trans>,
+        dataIndex: 'rating',
+        key: 'rating',
       },
-      {
-        title: <Trans>Age</Trans>,
-        dataIndex: 'age',
-        width: '6%',
-        key: 'age',
-      },
-      {
-        title: <Trans>Gender</Trans>,
-        dataIndex: 'isMale',
-        key: 'isMale',
-        width: '7%',
-        render: text => <span>{text ? 'Male' : 'Female'}</span>,
-      },
-      {
-        title: <Trans>Phone</Trans>,
-        dataIndex: 'phone',
-        key: 'phone',
-      },
-      {
+      { 
         title: <Trans>Email</Trans>,
         dataIndex: 'email',
         key: 'email',
       },
       {
-        title: <Trans>Address</Trans>,
-        dataIndex: 'address',
-        key: 'address',
+        title: <Trans>Grade</Trans>,
+        dataIndex: 'Grade',
+        key: 'Grade',
       },
       {
-        title: <Trans>CreateTime</Trans>,
-        dataIndex: 'createTime',
-        key: 'createTime',
+        title: <Trans>Programming Language</Trans>,
+        dataIndex: 'language',
+        key: 'language',
       },
       {
-        title: <Trans>Operation</Trans>,
+        title: <Trans>Frameworks</Trans>,
+        dataIndex: 'frameworks',
+        key: 'frameworks',
+      },
+      {
+        title: <Trans>Option</Trans>,
         key: 'operation',
         fixed: 'right',
-        width: '8%',
         render: (text, record) => {
           return (
             <DropOption
               onMenuClick={e => this.handleMenuClick(record, e)}
               menuOptions={[
-                { key: '1', name: t`Update` },
-                { key: '2', name: t`Delete` },
+                { key: '1', name: t`Send Invite` },
+                { key: '2', name: t`Hide this Person` }
               ]}
             />
           )
@@ -119,9 +110,8 @@ class List extends PureComponent {
 }
 
 List.propTypes = {
-  onDeleteItem: PropTypes.func,
-  onEditItem: PropTypes.func,
-  location: PropTypes.object,
+  onInviteItem: PropTypes.func,
+  onHideItem: PropTypes.func,
 }
 
 export default List
