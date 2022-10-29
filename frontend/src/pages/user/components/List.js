@@ -35,18 +35,9 @@ class List extends PureComponent {
 
     const columns = [
       {
-        title: <Trans>Avatar</Trans>,
-        dataIndex: 'avatar',
-        key: 'avatar',
-        width: '7%',
-        fixed: 'left',
-        render: text => <Avatar style={{ marginLeft: 8 }} src={text} />,
-      },
-      {
         title: <Trans>Name</Trans>,
         dataIndex: 'name',
         key: 'name',
-        render: (text, record) => <Link to={`user/${record.id}`}>{text}</Link>,
       },
       {
         title: <Trans>Rating</Trans>,
