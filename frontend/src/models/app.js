@@ -112,13 +112,6 @@ export default {
         store.set('user', user)
         store.set('isInit', true)
         goDashboard()
-      } else if (queryLayout(config.layouts, locationPathname) !== 'public') {
-        history.push({
-          pathname: '/login',
-          search: stringify({
-            from: locationPathname,
-          }),
-        })
       }
     },
 
@@ -130,6 +123,9 @@ export default {
         store.set('user', {})
         store.set('isInit', false)
         yield put({ type: 'query' })
+        history.push({
+        pathname: '/login',
+        })
       } else {
         throw data
       }

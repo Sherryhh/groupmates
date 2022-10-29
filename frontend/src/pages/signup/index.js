@@ -14,10 +14,10 @@ import styles from './index.less'
 const FormItem = Form.Item
 
 @connect(({ loading, dispatch }) => ({ loading, dispatch }))
-class Login extends PureComponent {
+class Signup extends PureComponent {
 
   render() {
-    const { dispatch, loading } = this.props
+    const { dispatch,   loading } = this.props
 
     const handleOk = values => {
       dispatch({ type: 'login/login', payload: values })
@@ -64,21 +64,12 @@ class Login extends PureComponent {
               </FormItem>)}
             />
             <Row>
-              <Button
-                type="primary"
-                htmlType="submit"
-                loading={loading.effects.login}
-              >
-                <Trans>Sign in</Trans>
-              </Button>
-
-              <Button
-                type="secondary"
-                onClick={() => history.push('/signup')}
-              >
-                <Trans>Sign up</Trans>
-              </Button>
-
+            <Button
+              type="primary"
+              onClick={() => history.push('/login')}
+            >
+              <Trans>Sign up</Trans>
+            </Button>
               <p>
                 <span className="margin-right">
                   <Trans>Username</Trans>
@@ -100,10 +91,10 @@ class Login extends PureComponent {
   }
 }
 
-Login.propTypes = {
+Signup.propTypes = {
   form: PropTypes.object,
   dispatch: PropTypes.func,
   loading: PropTypes.object,
 }
 
-export default Login
+export default Signup
