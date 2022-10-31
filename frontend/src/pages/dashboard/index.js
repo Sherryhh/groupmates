@@ -21,6 +21,7 @@ import store from 'store'
 
 const FormItem = Form.Item;
 const { Option } = Select;
+import axios from 'axios';
 
 const bodyStyle = {
   bodyStyle: {
@@ -41,20 +42,63 @@ class Dashboard extends PureComponent {
       languageInfoEditing: false,
       frameworkInfoEditing: false,
       ratingInfoEditing: false,
-      name:"Emma",
-      email:"emma@ucla.edu",
-      year:"Freshman",
-      major:"Computer Science",
+      name:"",
+      email:"",
+      year:"",
+      major:"",
       intro:"",
       first:"",
       second:"",
       third:"",
-      server:["Django"],
+      server:[],
       client:[],
       frontendSkillScore:"3",
       backendSkillScore:"5",
     };
+    this.getUserInfo()
   }
+  getUserInfo(){
+      const url = '/api/v1/getUserInfo';
+      axios.get(url,{
+        params: {},
+      }).then((response) => {
+        console.log(response)
+          this.setState({
+              name: response['data']['name'],
+              email: response['data']['email'],
+              year: response['data']['year'],
+              major: response['data']['major'],
+              intro: response['data']['intro'],
+              first: response['data']['first'],
+              second: response['data']['second'],
+              third: response['data']['third']
+          })
+      }).catch(error => {
+          console.log('Get children list', error);
+      });
+  };
+
+  editUserInfo(){
+      const url = '/api/v1/editUserInfo';
+      console.log(this.state.name);
+      axios.get(url,{
+        params: {
+          name:this.state.name,
+          email:this.state.email,
+          major:this.state.major,
+          year:this.state.year,
+        },
+      }).then((response) => {
+        console.log(response)
+      }).catch(error => {
+          console.log('Edit basic information', error);
+      });
+  };
+
+  componentDidMount() {
+    this.getUserInfo();
+  }
+
   render() {
     const userDetail = store.get('user')
     const { avatar, username } = userDetail
@@ -70,6 +114,9 @@ class Dashboard extends PureComponent {
       browser,
       cpu,
       user,
+      basicInfo,
+      languagesInfo,
+      frameworksInfo,
     } = dashboard
 
     const numberCards = numbers.map((item, key) => (
@@ -100,6 +147,7 @@ class Dashboard extends PureComponent {
             type="primary"
                   onClick={() => {
                     this.setState({ basicInfoediting: false });
+                    this.editUserInfo();
                   }}
                 >
                   submit
