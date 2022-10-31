@@ -8,17 +8,19 @@ from models import Student
 
 @app.route('/api/v1/getUserInfo')
 def get_user_info():
-    student = Student.query.filter_by(id=1).first()
+    userId  = request.args.get('userId')
+    student = Student.query.filter_by(id=userId).first()
 
     return {"name":student.name, "email":student.email, "year":student.year, "major": student.major}, 200
 
 @app.route('/api/v1/editUserInfo',methods=['GET'])
 def edit_user_info():
+    userId  = request.args.get('userId')
     name  = request.args.get('name')
     email = request.args.get('email')
     year = request.args.get('year')
     major = request.args.get('major')
-    update = Student.query.filter_by(id=1).update({'name':name, 'email':email,'year':year,'major':major})
+    update = Student.query.filter_by(id=userId).update({'name':name, 'email':email,'year':year,'major':major})
     try:
         db.session.commit()
         return {"msg":"Edit successfully!"},200

@@ -54,13 +54,16 @@ class Dashboard extends PureComponent {
       client:[],
       frontendSkillScore:"3",
       backendSkillScore:"5",
+      userId: store.get('user').id,
     };
     this.getUserInfo()
   }
   getUserInfo(){
       const url = '/api/v1/getUserInfo';
       axios.get(url,{
-        params: {},
+        params: {
+          userId: this.state.userId,
+        },
       }).then((response) => {
         console.log(response)
           this.setState({
@@ -83,6 +86,7 @@ class Dashboard extends PureComponent {
       console.log(this.state.name);
       axios.get(url,{
         params: {
+          userId: this.state.userId,
           name:this.state.name,
           email:this.state.email,
           major:this.state.major,
