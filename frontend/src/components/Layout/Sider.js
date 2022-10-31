@@ -33,7 +33,7 @@ class Sider extends PureComponent {
       >
         <div className={styles.brand}>
           <div className={styles.logo}>
-            <img alt="logo" src={config.logoPath} />
+            {/* <img alt="logo" src={config.logoPath} /> */}
             {!collapsed && <h1>{config.siteName}</h1>}
           </div>
         </div>

@@ -51,6 +51,7 @@ class PrimaryLayout extends PureComponent {
     const user = store.get('user') || {}
     const permissions = store.get('permissions') || {}
     const routeList = store.get('routeList') || []
+    // console.log(routeList)
     const { isMobile } = this.state
     const { onCollapseChange } = this
 

@@ -46,7 +46,7 @@ class Login extends PureComponent {
       <Fragment>
         <div className={styles.form}>
           <div className={styles.logo}>
-            <img alt="logo" src={config.logoPath} />
+            {/* <img alt="logo" src={config.logoPath} /> */}
             <span>{config.siteName}</span>
           </div>
           <Form
@@ -79,7 +79,7 @@ class Login extends PureComponent {
                 <Trans>Sign up</Trans>
               </Button>
 
-              <p>
+              {/* <p>
                 <span className="margin-right">
                   <Trans>Username</Trans>
                   ：guest
@@ -88,12 +88,12 @@ class Login extends PureComponent {
                   <Trans>Password</Trans>
                   ：guest
                 </span>
-              </p>
+              </p> */}
             </Row>
           </Form>
         </div>
         <div className={styles.footer}>
-          <GlobalFooter links={footerLinks} copyright={config.copyright} />
+          <GlobalFooter links={footerLinks}/>
         </div>
       </Fragment>
     )

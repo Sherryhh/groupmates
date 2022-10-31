@@ -30,14 +30,14 @@ const database = [
   {
     id: '7',
     breadcrumbParentId: '1',
-    name: 'Posts',
+    name: 'Groups',
     zh: {
       name: '用户管理'
     },
     'pt-br': {
       name: 'Posts'
     },
-    icon: 'shopping-cart',
+    icon: 'user',
     route: '/post',
   },
   {
@@ -95,7 +95,7 @@ const database = [
   {
     id: '5',
     breadcrumbParentId: '1',
-    name: 'Charts',
+    name: 'My Group',
     zh: {
       name: 'Charts'
     },
@@ -108,44 +108,44 @@ const database = [
     id: '51',
     breadcrumbParentId: '5',
     menuParentId: '5',
-    name: 'ECharts',
+    name: 'Group Member',
     zh: {
       name: 'ECharts'
     },
     'pt-br': {
       name: 'ECharts'
     },
-    icon: 'line-chart',
+    icon: 'api',
     route: '/chart/ECharts',
   },
   {
     id: '52',
     breadcrumbParentId: '5',
     menuParentId: '5',
-    name: 'HighCharts',
+    name: 'Request',
     zh: {
       name: 'HighCharts'
     },
     'pt-br': {
       name: 'HighCharts'
     },
-    icon: 'bar-chart',
+    icon: 'api',
     route: '/chart/highCharts',
   },
-  {
-    id: '53',
-    breadcrumbParentId: '5',
-    menuParentId: '5',
-    name: 'Rechartst',
-    zh: {
-      name: 'Rechartst'
-    },
-    'pt-br': {
-      name: 'Rechartst'
-    },
-    icon: 'area-chart',
-    route: '/chart/Recharts',
-  },
+  // {
+  //   id: '53',
+  //   breadcrumbParentId: '5',
+  //   menuParentId: '5',
+  //   name: 'Rechartst',
+  //   zh: {
+  //     name: 'Rechartst'
+  //   },
+  //   'pt-br': {
+  //     name: 'Rechartst'
+  //   },
+  //   icon: 'area-chart',
+  //   route: '/chart/Recharts',
+  // },
 ]
 
 module.exports = {

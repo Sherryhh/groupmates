@@ -41,7 +41,7 @@ class Header extends PureComponent {
                 <Trans>Hi,</Trans>
               </span>
               <span>{username}</span>
-              <Avatar style={{ marginLeft: 8 }} src={avatar} />
+              {/* <Avatar style={{ marginLeft: 8 }} src={avatar} /> */}
             </Fragment>
           }
         >
@@ -83,57 +83,6 @@ class Header extends PureComponent {
         </Menu>
       )
     }
-
-    rightContent.unshift(
-      <Popover
-        placement="bottomRight"
-        trigger="click"
-        key="notifications"
-        overlayClassName={styles.notificationPopover}
-        getPopupContainer={() => document.querySelector('#primaryLayout')}
-        content={
-          <div className={styles.notification}>
-            <List
-              itemLayout="horizontal"
-              dataSource={notifications}
-              locale={{
-                emptyText: <Trans>You have viewed all notifications.</Trans>,
-              }}
-              renderItem={item => (
-                <List.Item className={styles.notificationItem}>
-                  <List.Item.Meta
-                    title={
-                      <Ellipsis tooltip lines={1}>
-                        {item.title}
-                      </Ellipsis>
-                    }
-                    description={moment(item.date).fromNow()}
-                  />
-                  <RightOutlined style={{ fontSize: 10, color: '#ccc' }} />
-                </List.Item>
-              )}
-            />
-            {notifications.length ? (
-              <div
-                onClick={onAllNotificationsRead}
-                className={styles.clearButton}
-              >
-                <Trans>Clear notifications</Trans>
-              </div>
-            ) : null}
-          </div>
-        }
-      >
-        <Badge
-          count={notifications.length}
-          dot
-          offset={[-10, 10]}
-          className={styles.iconButton}
-        >
-          <BellOutlined className={styles.iconFont} />
-        </Badge>
-      </Popover>
-    )
 
     return (
       <Layout.Header
