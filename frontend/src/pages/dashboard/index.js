@@ -52,15 +52,19 @@ class Dashboard extends PureComponent {
       third:"",
       server:[],
       client:[],
-      frontendSkillScore:"3",
-      backendSkillScore:"5",
+      frontendSkillScore:1,
+      backendSkillScore:1,
+      userId: store.get('user').id,
     };
     this.getUserInfo()
   }
   getUserInfo(){
+      console.log('get user info')
       const url = '/api/v1/getUserInfo';
       axios.get(url,{
-        params: {},
+        params: {
+          userId: this.state.userId,
+        },
       }).then((response) => {
         console.log(response)
           this.setState({
@@ -71,22 +75,27 @@ class Dashboard extends PureComponent {
               intro: response['data']['intro'],
               first: response['data']['first'],
               second: response['data']['second'],
-              third: response['data']['third']
+              third: response['data']['third'],
+              server: JSON.parse(response['data']['server']),
+              client: JSON.parse(response['data']['client']),
+              frontendSkillScore: response['data']['frontendSkillScore'],
+              backendSkillScore: response['data']['backendSkillScore']
           })
       }).catch(error => {
-          console.log('Get children list', error);
+          console.log('Get user info', error);
       });
   };
 
   editUserInfo(){
       const url = '/api/v1/editUserInfo';
-      console.log(this.state.name);
       axios.get(url,{
         params: {
+          userId: this.state.userId,
           name:this.state.name,
           email:this.state.email,
           major:this.state.major,
           year:this.state.year,
+          intro:this.state.intro
         },
       }).then((response) => {
         console.log(response)
@@ -94,6 +103,54 @@ class Dashboard extends PureComponent {
           console.log('Edit basic information', error);
       });
   };
+
+  editProgrammingLanguage(){
+      const url = '/api/v1/editProgrammingLanguage';
+      axios.get(url,{
+        params: {
+          userId:this.state.userId,
+          first:this.state.first,
+          second:this.state.second,
+          third:this.state.third,
+        },
+      }).then((response) => {
+        console.log(response)
+      }).catch(error => {
+          console.log('Edit programming Languages', error);
+      });
+  };
+
+  editUserRating(){
+    const url = '/api/v1/editUserRating';
+    axios.get(url,{
+      params: {
+        userId:this.state.userId,
+        frontendSkillScore:this.state.frontendSkillScore,
+        backendSkillScore:this.state.backendSkillScore,
+      },
+    }).then((response) => {
+      console.log(response)
+    }).catch(error => {
+        console.log('Edit skill rating', error);
+    });
+};
+
+editFrameworks(){
+  const url = '/api/v1/editFrameworks';
+  console.log(this.state.server);
+  console.log(this.state.client)
+  axios.get(url,{
+    params: {
+      userId:this.state.userId,
+      server:JSON.stringify(this.state.server),
+      client:JSON.stringify(this.state.client),
+    },
+  }).then((response) => {
+    console.log(response)
+  }).catch(error => {
+      console.log('Edit frameworks', error);
+  });
+};
 
   componentDidMount() {
     this.getUserInfo();
@@ -178,7 +235,7 @@ class Dashboard extends PureComponent {
               />
             ) : (
               <Input
-                placeholder={"Your name"}
+                disabled = {true}
                 value={this.state.name}
               />
             )}
@@ -195,6 +252,7 @@ class Dashboard extends PureComponent {
               />
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.email}
               />
             )}
@@ -215,6 +273,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.year}
               />
             )}
@@ -236,6 +295,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.major}
               />
             )}
@@ -252,6 +312,7 @@ class Dashboard extends PureComponent {
               />
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.intro}
               />
             )}
@@ -275,6 +336,7 @@ class Dashboard extends PureComponent {
             type="primary"
                   onClick={() => {
                     this.setState({ languageInfoEditing: false });
+                    this.editProgrammingLanguage();
                   }}
                 >
                   submit
@@ -308,6 +370,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.first}
               />
             )}
@@ -328,6 +391,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.second}
               />
             )}
@@ -347,6 +411,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.third}
               />
             )}
@@ -370,6 +435,7 @@ class Dashboard extends PureComponent {
             type="primary"
                   onClick={() => {
                     this.setState({ frameworkInfoEditing: false });
+                    this.editFrameworks();
                   }}
                 >
                   submit
@@ -401,6 +467,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.server}
               />
             )}
@@ -418,6 +485,7 @@ class Dashboard extends PureComponent {
               </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.client}
               />
             )}
@@ -440,6 +508,7 @@ class Dashboard extends PureComponent {
             type="primary"
                   onClick={() => {
                     this.setState({ ratingInfoEditing: false });
+                    this.editUserRating();
                   }}
                 >
                   submit
@@ -472,6 +541,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.frontendSkillScore}
               />
             )}
@@ -491,6 +561,7 @@ class Dashboard extends PureComponent {
                 </Select>
             ) : (
               <Input
+                disabled = {true}
                 value={this.state.backendSkillScore}
               />
             )}
