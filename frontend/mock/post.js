@@ -10,7 +10,6 @@ const database = Mock.mock({
         postId += 1
         return postId + 10000
       },
-      'status|1-2': 1,
       title: '@title',
       author: '@last',
       categories: '@word',

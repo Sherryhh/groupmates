@@ -67,11 +67,11 @@ const adminUsers = [
   },
   {
     id: 3,
-    username: 'emma',
+    username: 'Dexter',
     password: '123456',
-    permissions: userPermission.ADMIN,
+    permissions: userPermission.DEVELOPER,
     avatar: randomAvatar(),
-  }
+  },
 ]
 
 const queryArray = (array, key, keyAlias = 'key') => {

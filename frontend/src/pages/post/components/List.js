@@ -1,11 +1,70 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, useState, useEffect } from 'react'
 import { Table } from 'antd'
 import { t } from "@lingui/macro"
 import { Ellipsis, DropOption } from 'components'
 import styles from './List.less'
 import PropTypes from 'prop-types'
+import store from "store"
+import axios from 'axios';
+
+// function read(){
+//   const [state, setstate] = useState({});
+//   const [loading, setloading] = useState(true);
+//   useEffect(() => {
+//     getData();
+//   }, []);
+//   const getData = async () => {
+//     const url = '/api/v1/displayGroupInfo';
+//     await axios.get(url,{
+//       params: {
+//         groupId: store.get('user').id,
+//       },                                   
+//     }).then(
+//       res => {
+//         setloading(false);
+//         setstate(
+//           res.data.map(row => ({
+//             name: row.name,
+//             leader: row.leader,
+//             language: row.language,
+//             skill: row.skill,
+//           }))
+//         );
+//       }
+//     );
+//   };
+//   columns = [
+//     {
+//       title: t`Team Name`,
+//       dataIndex: 'name',
+//     },
+//     {
+//       title: t`Group Leader`,
+//       dataIndex: 'leader',
+//     },
+//     {
+//       title: t`Languages`,
+//       dataIndex: 'language',
+//     },
+//     {
+//       title: t`Looking for...`,
+//       dataIndex: 'skill',
+//     },
+//   ];
+//   return columns
+// }
 
 class List extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name:"",
+      email:"",
+      leader:"",
+      skill:"",
+    };
+    this.displayGroupInfo()
+  }
   handleMenuClick = (record) => {
     const { onJoinItem, onLearnItem, onHideItem } = this.props
     if (e.key === '1') {
@@ -17,24 +76,44 @@ class List extends PureComponent {
     }
   }
 
+  displayGroupInfo(){
+    const url = '/api/v1/displayGroupInfo';
+    axios.get(url,{
+      params: {
+        groupId: store.get('user').id,
+      },                                   
+    }).then((response) => {
+      console.log(response)
+      this.setState({
+        name: response['data']['name'],
+        leader: response['data']['leader'],
+        language: response['data']['language'],
+        skill: response['data']['skill'],
+      })
+    }).catch(error => {
+        console.log('Get children list', error);
+    });
+  }
+
   render() {
     const { onInviteItem, onJoinItem, onLearnItem, ...tableProps } = this.props
     const columns = [
+      // ...read(),
       {
         title: t`Team Name`,
-        dataIndex: 'author',
+        // dataIndex: 'name',
       },
       {
         title: t`Group Leader`,
-        dataIndex: 'author',
+        // dataIndex: 'leader',
       },
       {
         title: t`Languages`,
-        dataIndex: 'categories',
+        // dataIndex: 'language',
       },
       {
         title: t`Looking for...`,
-        dataIndex: 'comments',
+        // dataIndex: 'skill',
       },
       {
         title: t`Options`,

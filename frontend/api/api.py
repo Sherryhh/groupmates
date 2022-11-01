@@ -11,8 +11,10 @@ from models import Student, Group
 def get_user_info():
     userId  = request.args.get('userId')
     student = Student.query.filter_by(id=userId).first()
-
-    return {"name":student.name, "email":student.email, "year":student.year, "major": student.major}, 200
+    return {"name":student.name, "email":student.email, "year":student.year, "major": student.major, "intro": student.intro,     \
+    'first':student.first, 'second':student.second, 'third':student.third, \
+    'server':student.server, 'client':student.client, \
+    'frontendSkillScore':student.frontendSkillScore, 'backendSkillScore':student.backendSkillScore}, 200
 
 @app.route('/api/v1/editUserInfo',methods=['GET'])
 def edit_user_info():
@@ -21,12 +23,60 @@ def edit_user_info():
     email = request.args.get('email')
     year = request.args.get('year')
     major = request.args.get('major')
-    update = Student.query.filter_by(id=userId).update({'name':name, 'email':email,'year':year,'major':major})
+    intro = request.args.get('intro')
+    update = Student.query.filter_by(id=userId).update({'name':name, 'email':email,'year':year,'major':major, 'intro':intro})
     try:
         db.session.commit()
         return {"msg":"Edit successfully!"},200
     except:
         return {"msg":"Unable to update user info."}, 500
+
+@app.route('/api/v1/editProgrammingLanguage',methods=['GET'])
+def edit_programming_language():
+    userId = request.args.get('userId')
+    first  = request.args.get('first')
+    second = request.args.get('second')
+    third = request.args.get('third')
+    update = Student.query.filter_by(id=userId).update({'first':first, 'second':second,'third':third}) # update the database
+    try:
+        db.session.commit()
+        return {"msg":"Edit successfully!"},200
+    except:
+        return {"msg":"Unable to update programming language."}, 500
+
+@app.route('/api/v1/editUserRating',methods=['GET'])
+def edit_user_rating():
+    userId = request.args.get('userId')
+    frontendSkillScore  = request.args.get('frontendSkillScore')
+    backendSkillScore = request.args.get('backendSkillScore')
+    update = Student.query.filter_by(id=userId).update({'frontendSkillScore':frontendSkillScore, 'backendSkillScore':backendSkillScore}) # update the database
+    try:
+        db.session.commit()
+        return {"msg":"Edit successfully!"}, 200
+    except:
+        return {"msg":"Unable to update user rating."}, 500
+
+
+@app.route('/api/v1/editFrameworks',methods=['GET'])
+def edit_frameworks():
+    userId = request.args.get('userId')
+    server  = request.args.getlist('server')
+    client = request.args.getlist('client')
+    update = Student.query.filter_by(id=userId).update({'server':server, 'client':client}) # update the database
+    try:
+        db.session.commit()
+        return {"msg":"Edit successfully!"}, 200
+    except:
+        return {"msg":"Unable to update user frameworks."}, 500
+
+# @app.route('/api/v1/signin',methods=['GET'])
+# def signin():
+#     username = request.args.get('username')
+#     password = request.args.get('password')
+#     try:
+#         return {"msg":"Edit successfully!"}, 200
+#     except:
+#         return {"msg":"Unable to update user rating."}, 500
 
 # @app.route('/insertUserInfo')
 # def test():
