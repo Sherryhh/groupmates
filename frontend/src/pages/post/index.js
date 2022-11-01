@@ -10,6 +10,7 @@ import List from './components/List'
 
 
 
+
 @connect(({ post, loading }) => ({ post, loading }))
 class Post extends PureComponent {
   handleTabClick = key => {

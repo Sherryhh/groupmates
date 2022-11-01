@@ -1,3 +1,4 @@
+from queue import PriorityQueue
 import time
 from tokenize import group
 from flask import Flask, request, jsonify
@@ -93,12 +94,12 @@ def edit_frameworks():
 #         db.session.add(student)
 #         db.session.commit()
 
-@app.route('/api/v1/displayGroupInfo' methods=['GET'])
+@app.route('/api/v1/getGroupInfo', methods=['GET'])
 def display_group_info():
-    groupId  = request.args.get('groupId')
-    group = Group.query.filter_by(id=groupId).first()
-
-    return {"name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill}, 200
+    isOpen = request.args.get('open')
+    group = Group.query.filter_by(open=isOpen).first()
+    d = {"name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill}
+    return d, 200
 
 if __name__ == '__main__':
     with app.app_context():

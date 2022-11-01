@@ -48,7 +48,7 @@ const adminUsers = [
     id: 0,
     username: 'admin',
     password: 'admin',
-    permissions: userPermission.ADMIN,
+    permissions: userPermission.DEFAULT,
     avatar: randomAvatar(),
   },
   {
@@ -62,7 +62,7 @@ const adminUsers = [
     id: 2,
     username: '吴彦祖',
     password: '123456',
-    permissions: userPermission.DEVELOPER,
+    permissions: userPermission.DEFAULT,
     avatar: randomAvatar(),
   },
   {

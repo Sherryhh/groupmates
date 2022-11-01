@@ -4,65 +4,17 @@ import { t } from "@lingui/macro"
 import { Ellipsis, DropOption } from 'components'
 import styles from './List.less'
 import PropTypes from 'prop-types'
-import store from "store"
 import axios from 'axios';
-
-// function read(){
-//   const [state, setstate] = useState({});
-//   const [loading, setloading] = useState(true);
-//   useEffect(() => {
-//     getData();
-//   }, []);
-//   const getData = async () => {
-//     const url = '/api/v1/displayGroupInfo';
-//     await axios.get(url,{
-//       params: {
-//         groupId: store.get('user').id,
-//       },                                   
-//     }).then(
-//       res => {
-//         setloading(false);
-//         setstate(
-//           res.data.map(row => ({
-//             name: row.name,
-//             leader: row.leader,
-//             language: row.language,
-//             skill: row.skill,
-//           }))
-//         );
-//       }
-//     );
-//   };
-//   columns = [
-//     {
-//       title: t`Team Name`,
-//       dataIndex: 'name',
-//     },
-//     {
-//       title: t`Group Leader`,
-//       dataIndex: 'leader',
-//     },
-//     {
-//       title: t`Languages`,
-//       dataIndex: 'language',
-//     },
-//     {
-//       title: t`Looking for...`,
-//       dataIndex: 'skill',
-//     },
-//   ];
-//   return columns
-// }
 
 class List extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      name:"",
-      email:"",
+      name: "",
       leader:"",
+      language:"",
       skill:"",
-    };
+    }
     this.displayGroupInfo()
   }
   handleMenuClick = (record) => {
@@ -77,10 +29,11 @@ class List extends PureComponent {
   }
 
   displayGroupInfo(){
-    const url = '/api/v1/displayGroupInfo';
+    console.log('get group info')
+    const url = '/api/v1/getGroupInfo';
     axios.get(url,{
       params: {
-        groupId: store.get('user').id,
+        open: 1,
       },                                   
     }).then((response) => {
       console.log(response)
@@ -97,23 +50,27 @@ class List extends PureComponent {
 
   render() {
     const { onInviteItem, onJoinItem, onLearnItem, ...tableProps } = this.props
+    // cols =  readRow()
     const columns = [
-      // ...read(),
       {
         title: t`Team Name`,
         // dataIndex: 'name',
+        render: () => <text>{this.state.name}</text>,
       },
       {
         title: t`Group Leader`,
         // dataIndex: 'leader',
+        render: () => <text>{this.state.leader}</text>,
       },
       {
         title: t`Languages`,
         // dataIndex: 'language',
+        render: () => <text>{this.state.language}</text>,
       },
       {
         title: t`Looking for...`,
         // dataIndex: 'skill',
+        render: () => <text>{this.state.skill}</text>,
       },
       {
         title: t`Options`,
