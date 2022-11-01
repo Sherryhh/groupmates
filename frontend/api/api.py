@@ -97,9 +97,11 @@ def edit_frameworks():
 @app.route('/api/v1/getGroupInfo', methods=['GET'])
 def display_group_info():
     isOpen = request.args.get('open')
-    group = Group.query.filter_by(open=isOpen).first()
-    d = {"name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill}
-    return d, 200
+    groups = Group.query.filter_by(open=isOpen).all()
+    res = []
+    for group in groups:
+        res.append({"key":group.id, "name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill})
+    return res, 200
 
 if __name__ == '__main__':
     with app.app_context():

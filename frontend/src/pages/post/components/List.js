@@ -6,15 +6,12 @@ import styles from './List.less'
 import PropTypes from 'prop-types'
 import axios from 'axios';
 
+const all_data = [{"id":1, "open": 1, "name":"Apple", "leader":"Red", "language":"Python", "skill":"Java"},
+{"id":2, "open": 1, "name":"Pear", "leader":"Green","language":"Java", "skill":"Python" }]
 class List extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      name: "",
-      leader:"",
-      language:"",
-      skill:"",
-    }
+    this.a = []
     this.displayGroupInfo()
   }
   handleMenuClick = (record) => {
@@ -28,6 +25,7 @@ class List extends PureComponent {
     }
   }
 
+
   displayGroupInfo(){
     console.log('get group info')
     const url = '/api/v1/getGroupInfo';
@@ -36,13 +34,18 @@ class List extends PureComponent {
         open: 1,
       },                                   
     }).then((response) => {
-      console.log(response)
-      this.setState({
-        name: response['data']['name'],
-        leader: response['data']['leader'],
-        language: response['data']['language'],
-        skill: response['data']['skill'],
-      })
+      this.a = response['data']
+      for (let index = 0; index < this.a.length; index++) {
+        const newItem = {
+          "id": this.a[index].key,
+          "name": this.a[index].name,
+          "leader": this.a[index].leader,
+          "language": this.a[index].language,
+          "skill": this.a[index].skill,
+        }
+        all_data.push(newItem)
+      }
+      console.log(all_data)
     }).catch(error => {
         console.log('Get children list', error);
     });
@@ -50,27 +53,33 @@ class List extends PureComponent {
 
   render() {
     const { onInviteItem, onJoinItem, onLearnItem, ...tableProps } = this.props
-    // cols =  readRow()
+    // const datas = [{"id":1, "open": 1, "name":"Apple", "leader":"Red", "language":"Python", "skill":"Java"},
+    // {"id":2, "open": 1, "name":"Pear", "leader":"Green","language":"Java", "skill":"Python" }]
+    // console.log(datas)
     const columns = [
       {
         title: t`Team Name`,
-        // dataIndex: 'name',
-        render: () => <text>{this.state.name}</text>,
+        dataIndex: 'name',
+        key: 'name',
+        // render: () => <text>{this.state.name}</text>,
       },
       {
         title: t`Group Leader`,
-        // dataIndex: 'leader',
-        render: () => <text>{this.state.leader}</text>,
+        dataIndex: 'leader',
+        key: 'leader',
+        // render: () => <text>{this.state.leader}</text>,
       },
       {
         title: t`Languages`,
-        // dataIndex: 'language',
-        render: () => <text>{this.state.language}</text>,
+        dataIndex: 'language',
+        key: 'language',
+        // render: () => <text>{this.state.language}</text>,
       },
       {
         title: t`Looking for...`,
-        // dataIndex: 'skill',
-        render: () => <text>{this.state.skill}</text>,
+        dataIndex: 'skill',
+        key: 'skill',
+        // render: () => <text>{this.state.skill}</text>,
       },
       {
         title: t`Options`,
@@ -99,6 +108,7 @@ class List extends PureComponent {
         bordered
         scroll={{ x: 1200 }}
         className={styles.table}
+        dataSource={all_data}
         columns={columns}
         simple
         rowKey={record => record.id}
