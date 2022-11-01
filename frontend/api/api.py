@@ -1,12 +1,13 @@
 import time
+from tokenize import group
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from index import app, db
-from models import Student
+from models import Student, Group
 
 # userInfo = {'name':'Emma', 'email':'emma@g.ucla.edu', 'year':'Freshman', 'major':'Computer Science', 'intro':'123', 'first':'Java', 'second':'Python', 'third':'C++'}
 
-@app.route('/api/v1/getUserInfo')
+@app.route('/api/v1/getUserInfo', methods=['GET'])
 def get_user_info():
     userId  = request.args.get('userId')
     student = Student.query.filter_by(id=userId).first()
@@ -41,6 +42,13 @@ def edit_user_info():
 #     with app.app_context():
 #         db.session.add(student)
 #         db.session.commit()
+
+@app.route('/api/v1/displayGroupInfo' methods=['GET'])
+def display_group_info():
+    groupId  = request.args.get('groupId')
+    group = Group.query.filter_by(id=groupId).first()
+
+    return {"name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill}, 200
 
 if __name__ == '__main__':
     with app.app_context():
