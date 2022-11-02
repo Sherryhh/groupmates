@@ -21,3 +21,8 @@ package-lock.json
 # jslingui
 src/locales/_build
 src/locales/**/*.js
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
