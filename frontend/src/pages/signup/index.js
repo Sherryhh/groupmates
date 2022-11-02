@@ -22,25 +22,6 @@ class Signup extends PureComponent {
     const handleOk = values => {
       dispatch({ type: 'login/login', payload: values })
     }
-    let footerLinks = [
-      {
-        key: 'github',
-        title: <GithubOutlined />,
-        href: 'https://github.com/zuiidea/antd-admin',
-        blankTarget: true,
-      },
-    ]
-
-    if (config.i18n) {
-      footerLinks = footerLinks.concat(
-        config.i18n.languages.map(item => ({
-          key: item.key,
-          title: (
-            <span onClick={setLocale.bind(null, item.key)}>{item.title}</span>
-          ),
-        }))
-      )
-    }
 
     return (
       <Fragment>
@@ -70,21 +51,8 @@ class Signup extends PureComponent {
             >
               <Trans>Sign up</Trans>
             </Button>
-              {/* <p>
-                <span className="margin-right">
-                  <Trans>Username</Trans>
-                  ：guest
-                </span>
-                <span>
-                  <Trans>Password</Trans>
-                  ：guest
-                </span>
-              </p> */}
             </Row>
           </Form>
-        </div>
-        <div className={styles.footer}>
-          <GlobalFooter links={footerLinks} />
         </div>
       </Fragment>
     )

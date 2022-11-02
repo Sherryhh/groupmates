@@ -59,29 +59,29 @@ class Header extends PureComponent {
         item => item.key === language
       )
 
-      rightContent.unshift(
-        <Menu
-          key="language"
-          selectedKeys={[currentLanguage.key]}
-          onClick={data => {
-            setLocale(data.key)
-          }}
-          mode="horizontal"
-        >
-          <SubMenu title={<Avatar size="small" src={currentLanguage.flag} />}>
-            {languages.map(item => (
-              <Menu.Item key={item.key}>
-                <Avatar
-                  size="small"
-                  style={{ marginRight: 8 }}
-                  src={item.flag}
-                />
-                {item.title}
-              </Menu.Item>
-            ))}
-          </SubMenu>
-        </Menu>
-      )
+      // rightContent.unshift(
+      //   <Menu
+      //     key="language"
+      //     selectedKeys={[currentLanguage.key]}
+      //     onClick={data => {
+      //       setLocale(data.key)
+      //     }}
+      //     mode="horizontal"
+      //   >
+      //     <SubMenu title={<Avatar size="small" src={currentLanguage.flag} />}>
+      //       {languages.map(item => (
+      //         <Menu.Item key={item.key}>
+      //           <Avatar
+      //             size="small"
+      //             style={{ marginRight: 8 }}
+      //             src={item.flag}
+      //           />
+      //           {item.title}
+      //         </Menu.Item>
+      //       ))}
+      //     </SubMenu>
+      //   </Menu>
+      // )
     }
 
     return (

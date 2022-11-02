@@ -69,7 +69,7 @@ const adminUsers = [
     id: 3,
     username: 'Dexter',
     password: '123456',
-    permissions: userPermission.DEVELOPER,
+    permissions: userPermission.DEFAULT,
     avatar: randomAvatar(),
   },
 ]

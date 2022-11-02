@@ -87,7 +87,7 @@ class PrimaryLayout extends PureComponent {
       collapsed,
       notifications,
       onCollapseChange,
-      avatar: user.avatar,
+      // avatar: user.avatar,
       username: user.username,
       fixed: config.fixedHeader,
       onAllNotificationsRead() {
@@ -149,7 +149,7 @@ class PrimaryLayout extends PureComponent {
             />
             <GlobalFooter
               className={styles.footer}
-              copyright={config.copyright}
+              // copyright={config.copyright}
             />
           </div>
         </Layout>
