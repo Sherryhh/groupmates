@@ -39,11 +39,6 @@ class List extends PureComponent {
         dataIndex: 'name',
         key: 'name',
       },
-      {
-        title: <Trans>Rating</Trans>,
-        dataIndex: 'rating',
-        key: 'rating',
-      },
       { 
         title: <Trans>Email</Trans>,
         dataIndex: 'email',
@@ -52,7 +47,7 @@ class List extends PureComponent {
       {
         title: <Trans>Grade</Trans>,
         dataIndex: 'Grade',
-        key: 'Grade',
+        key: 'grade',
       },
       {
         title: <Trans>Programming Language</Trans>,

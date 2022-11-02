@@ -30,7 +30,6 @@ class List extends PureComponent {
     }
   }
 
-
   displayGroupInfo(){
     console.log('get group info')
     const url = '/api/v1/getGroupInfo';
@@ -40,6 +39,16 @@ class List extends PureComponent {
       },                                   
     }).then((response) => {
       this.a = response['data']
+      for (let index = 0; index < this.a.length; index++) {
+        const newItem = {
+          "id": this.a[index].key,
+          "name": this.a[index].name,
+          "leader": this.a[index].leader,
+          "language": this.a[index].language,
+          "skill": this.a[index].skill,
+        }
+        all_data.push(newItem)
+      }
     }).catch(error => {
         console.log('Get children list', error);
     });
@@ -50,16 +59,16 @@ class List extends PureComponent {
     // const datas = [{"id":1, "open": 1, "name":"Apple", "leader":"Red", "language":"Python", "skill":"Java"},
     // {"id":2, "open": 1, "name":"Pear", "leader":"Green","language":"Java", "skill":"Python" }]
     // console.log(datas)
-    for (let index = 0; index < this.a.length; index++) {
-      const newItem = {
-        "id": this.a[index].key,
-        "name": this.a[index].name,
-        "leader": this.a[index].leader,
-        "language": this.a[index].language,
-        "skill": this.a[index].skill,
-      }
-      all_data.push(newItem)
-    }
+    // for (let index = 0; index < this.a.length; index++) {
+    //   const newItem = {
+    //     "id": this.a[index].key,
+    //     "name": this.a[index].name,
+    //     "leader": this.a[index].leader,
+    //     "language": this.a[index].language,
+    //     "skill": this.a[index].skill,
+    //   }
+    //   all_data.push(newItem)
+    // }
     
     const columns = [
       {

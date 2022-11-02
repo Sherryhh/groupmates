@@ -4,20 +4,14 @@ import qs from 'qs'
 const { ApiPrefix } = Constant
 
 let usersListData = Mock.mock({
-  'data|80-100': [
+  'data|10-20': [
     {
       id: '@id',
       name: '@name',
-      nickName: '@last',
-      phone: /^1[34578]\d{9}$/,
-      'age|11-99': 1,
-      address: '@county(true)',
-      isMale: '@boolean',
+      grade: '123',
+      language: '456',
       email: '@email',
-      createTime: '@datetime',
-      avatar() {
-        return randomAvatar()
-      },
+      frameworks: '789',
     },
   ],
 })
@@ -49,28 +43,24 @@ const adminUsers = [
     username: 'admin',
     password: 'admin',
     permissions: userPermission.DEFAULT,
-    avatar: randomAvatar(),
   },
   {
     id: 1,
     username: 'guest',
     password: 'guest',
     permissions: userPermission.DEFAULT,
-    avatar: randomAvatar(),
   },
   {
     id: 2,
     username: '吴彦祖',
     password: '123456',
     permissions: userPermission.DEFAULT,
-    avatar: randomAvatar(),
   },
   {
     id: 3,
     username: 'Dexter',
     password: '123456',
     permissions: userPermission.DEFAULT,
-    avatar: randomAvatar(),
   },
 ]
 

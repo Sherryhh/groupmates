@@ -2,33 +2,13 @@ import React, { PureComponent, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'umi'
 import { Row, Col, Card, Form, Input, Select, Button} from 'antd'
-import { Color } from 'utils'
 import { Page, ScrollBar } from 'components'
-import {
-  NumberCard,
-  Quote,
-  Sales,
-  Weather,
-  RecentSales,
-  Comments,
-  Completed,
-  Browser,
-  Cpu,
-  User,
-} from './components'
 import styles from './index.less'
 import store from 'store'
 
 const FormItem = Form.Item;
 const { Option } = Select;
 import axios from 'axios';
-
-const bodyStyle = {
-  bodyStyle: {
-    height: 432,
-    background: '#fff',
-  },
-}
 
 @connect(({ app, dashboard, loading }) => ({
   dashboard,
@@ -157,31 +137,6 @@ editFrameworks(){
   }
 
   render() {
-    const userDetail = store.get('user')
-    const { avatar, username } = userDetail
-    const { dashboard, loading } = this.props
-    const {
-      weather,
-      sales,
-      quote,
-      numbers,
-      recentSales,
-      comments,
-      completed,
-      browser,
-      cpu,
-      user,
-      basicInfo,
-      languagesInfo,
-      frameworksInfo,
-    } = dashboard
-
-    const numberCards = numbers.map((item, key) => (
-      <Col key={key} lg={6} md={12}>
-        <NumberCard {...item} />
-      </Col>
-    ))
-
     return (
       <Page
         // loading={loading.models.dashboard && sales.length === 0}

@@ -1,14 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'umi'
-import { Row, Tabs } from 'antd'
+import { Row } from 'antd'
 import { history } from 'umi'
 import { stringify } from 'qs'
-import { t } from "@lingui/macro"
 import { Page } from 'components'
 import List from './components/List'
-
-
 
 
 @connect(({ post, loading }) => ({ post, loading }))
