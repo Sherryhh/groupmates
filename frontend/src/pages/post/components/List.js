@@ -43,7 +43,6 @@ class List extends PureComponent {
         const newItem = {
           "id": this.a[index].key,
           "name": this.a[index].name,
-          "leader": this.a[index].leader,
           "language": this.a[index].language,
           "skill": this.a[index].skill,
         }
@@ -76,12 +75,6 @@ class List extends PureComponent {
         dataIndex: 'name',
         key: 'name',
         // render: () => <text>{this.state.name}</text>,
-      },
-      {
-        title: t`Group Leader`,
-        dataIndex: 'leader',
-        key: 'leader',
-        // render: () => <text>{this.state.leader}</text>,
       },
       {
         title: t`Languages`,
