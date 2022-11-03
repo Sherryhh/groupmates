@@ -1,15 +1,5 @@
 from index import db
 
-# class Test(db.Model):
-
-    # __tablename__ = "students"
-    #
-    # id = db.Column(db.Integer, primary_key = True)
-    # name = db.Column(db.String(255))
-    #
-    # def __init__(self, name):
-    #     self.name = name
-
 class Student(db.Model):
 
     __tablename__ = "student"
@@ -28,12 +18,15 @@ class Student(db.Model):
     frontendSkillScore = db.Column(db.Integer)
     backendSkillScore = db.Column(db.Integer)
 
-    def __init__(self, name, email, year, major, intro, server, client, frontendSkillScore, backendSkillScore):
+    def __init__(self, name, email, year, major, intro, first, second, third, server, client, frontendSkillScore, backendSkillScore):
         self.name = name
         self.email = email
         self.year = year
         self.major = major
         self.intro = intro
+        self.first = first
+        self.second = second
+        self.third = third
         self.server = server
         self.client = client
         self.frontendSkillScore = frontendSkillScore
