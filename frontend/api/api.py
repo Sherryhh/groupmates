@@ -99,8 +99,8 @@ def edit_frameworks():
 #         db.session.add(student)
 #         db.session.commit()
 
-@app.route('/api/v1/getGroupInfo', methods=['GET'])
-def display_group_info():
+@app.route('/api/v1/getAllGroupInfo', methods=['GET'])
+def get_all_group_info():
     isOpen = request.args.get('open')
     groups = Group.query.filter_by(open=isOpen).all()
     res = []

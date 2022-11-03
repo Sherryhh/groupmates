@@ -19,7 +19,7 @@ const database = [
     id: '7',
     breadcrumbParentId: '1',
     name: 'Groups',
-    icon: 'user',
+    icon: 'team',
     route: '/post',
   },
   {

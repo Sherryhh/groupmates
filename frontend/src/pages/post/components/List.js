@@ -31,8 +31,8 @@ class List extends PureComponent {
   }
 
   displayGroupInfo(){
-    console.log('get group info')
-    const url = '/api/v1/getGroupInfo';
+    console.log('get all group info')
+    const url = '/api/v1/getAllGroupInfo';
     axios.get(url,{
       params: {
         open: 1,
