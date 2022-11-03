@@ -32,7 +32,7 @@ const database = [
     id: '51',
     breadcrumbParentId: '5',
     menuParentId: '5',
-    name: 'Group Member',
+    name: 'Group Dashboard',
     icon: 'api',
     route: '/chart/ECharts',
   },
