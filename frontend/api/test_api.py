@@ -99,13 +99,13 @@ def test_editProgrammingLanguage(client, route_editProgrammingLanguage):
 def test_editUserRating(client, route_editUserRating):
     response = client.get('/api/v1/editUserRating', json={
         'userId': 3,
-        'frontendSkillScore': "5",
-        'backendSkillScore': "4"
+        'frontendSkillScore': 5,
+        'backendSkillScore': 4
     })
     assert response.status_code == 200
 
 
-def test_editUserRating(client, route_editFrameworks):
+def test_editFrameworks(client, route_editFrameworks):
     response = client.get('/api/v1/editFrameworks', json={
         'userId': 3,
         'server': "x",
@@ -123,6 +123,22 @@ def test_get_user_info_from_db(app, _db):
     assert student.intro == 'I want to die! Who can save me, God!!'
 
 
+def test_get_user_info_from_db_2(app, _db):
+    student = Student.query.filter_by(id=3).first()
+    assert student.name == "Sam"
+    assert student.major == 'CS'
+    assert student.email == 'sam@g.ucla.edu'
+    assert student.year == 'Senior'
+    assert student.intro == 'I am the best student!'
+    assert student.frontendSkillScore == 5
+    assert student.backendSkillScore == 4
+    assert student.server == 'x'
+    assert student.client == 'y'
+    assert student.first == 'C'
+    assert student.second == 'C++'
+    assert student.third == 'Java'
+
+
 def test_option_on_multiple_rules(app, client):
     @app.route("/api/v1/getUserInfo", methods=["GET", "POST"])
     def func():
@@ -134,3 +150,22 @@ def test_option_on_multiple_rules(app, client):
 
     rv = client.open("/api/v1/getUserInfo", method="OPTIONS")
     assert sorted(rv.allow) == ["GET", "HEAD", "OPTIONS", "POST", "PUT"]
+
+
+# the folloing tests are placeholders
+# waiting for API implementation
+
+def test_getAllStudentsInfo():
+    pass
+
+def test_getAllIndividualRequests():
+    pass
+
+def test_sendIndividualRequest():
+    pass
+
+def test_sendGroupRequest():
+    pass
+
+def test_get_all_group_info():
+    pass
