@@ -69,3 +69,15 @@ class Student(db.Model):
             return True
         except:
             return False
+
+    def getAllStudentsInfo():
+        pass
+
+    def getAllIndividualRequests():
+        pass
+
+    def sendIndividualRequest(targetStudentId):
+        pass
+
+    def sendGroupRequest(targetGroupId):
+        pass
