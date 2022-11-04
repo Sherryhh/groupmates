@@ -3,7 +3,9 @@ import pytest
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
-from models import Student, Group
+import sys
+sys.path.append("..")
+from api.model import Student, Group
 
 # Use fixture to set Testing Context
 # The following are testing context
@@ -118,8 +120,8 @@ def test_editFrameworks(client, route_editFrameworks):
     assert response.status_code == 200
 
 def test_getUserInfo(client):
-    response = client.get('/api/v1/sendGroupRequest', json={
-        'userId': 3
+    response = client.get('/api/v1/getUserInfo', json={
+        'userId': 4
     })
     assert response.status_code == 200
     data = json.loads(response.get_data(as_text=True))
@@ -137,7 +139,7 @@ def test_get_user_info_from_db(app, _db):
 
 
 def test_get_user_info_from_db_2(app, _db):
-    student = Student.query.filter_by(id=3).first()
+    student = Student.query.filter_by(id=4).first()
     assert student.name == "Sam"
     assert student.major == 'CS'
     assert student.email == 'sam@g.ucla.edu'
@@ -208,14 +210,14 @@ def test_getGroupInfo(client):
     assert data['groupId'] == 1
 
 def test_getAllGroupInfo(client):
-    response = client.get('/api/v1/getGroupInfo')
+    response = client.get('/api/v1/getAllGroupInfo')
     assert response.status_code == 200
     data = json.loads(response.get_data(as_text=True))
     assert data
     assert data['1']
 
 def test_getAllGroupRequest(client):
-    response = client.get('/api/v1/getGroupInfo', json={
+    response = client.get('/api/v1/getAllGroupRequest', json={
         'groupId': 1
     })
     assert response.status_code == 200
@@ -231,7 +233,7 @@ def test_getAllMember(client):
     assert data
 
 def test_changeGroupName(client):
-    response = client.post('/api/v1/getAllMember', json={
+    response = client.post('/api/v1/changeGroupName', json={
         'groupId': 1,
         'name': 'BugMakers'
     })

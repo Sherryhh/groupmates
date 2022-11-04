@@ -1,4 +1,4 @@
-from index import db
+from ..index import db
 
 class Student(db.Model):
 
