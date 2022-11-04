@@ -46,8 +46,7 @@ cd frontend/api
 python3 -m flask run
 ```
 
-5. For login page, please refer to `frontend/mock/user.js` for now for current registered users
-* will be update in the future
+5. For login page, please refer to `frontend/mock/user.js` for now for current registered users (will be update in the future)
 
 
 ## Citation
