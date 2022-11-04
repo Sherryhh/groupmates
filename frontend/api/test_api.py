@@ -1,3 +1,4 @@
+import json
 import pytest
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -38,7 +39,6 @@ def app_config():
 def client(app):
     return app.test_client()
 
-
 @pytest.fixture(scope='function')
 def route_getUserInfo(app, client):
     @app.route("/api/v1/getUserInfo", methods=["GET"])
@@ -73,6 +73,7 @@ def route_editFrameworks(app, client):
     def index4():
         return "Aha!"
 
+# The following are Student API tests
 
 def test_editUserInfo(client, route_editUserInfo):
     response = client.get('/api/v1/editUserInfo', json={
@@ -108,10 +109,47 @@ def test_editUserRating(client, route_editUserRating):
 def test_editFrameworks(client, route_editFrameworks):
     response = client.get('/api/v1/editFrameworks', json={
         'userId': 3,
-        'server': "x",
-        'client': "y"
+        'server': "Flask",
+        'client': "React"
     })
     assert response.status_code == 200
+
+def test_getAllStudentsInfo(client):
+    response = client.get('/api/v1/getAllStudentsInfo')
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data
+    assert '3' in data
+
+def test_getAllIndividualRequests(client):
+    response = client.get('/api/v1/getAllIndividualRequests', json={
+        'userId': 3
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_test=True))
+    assert data is not None
+
+def test_sendIndividualRequest(client):
+    response = client.post('/api/v1/sendIndividualRequest', json={
+        'userId': 3
+    })
+    assert response.status_code == 200
+
+def test_sendGroupRequest(client):
+    response = client.post('/api/v1/sendGroupRequest', json={
+        'userId': 3,
+        'groupId': 1
+    })
+    assert response.status_code == 200
+
+def test_getUserInfo(client):
+    response = client.get('/api/v1/sendGroupRequest', json={
+        'userId': 3
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data
+    assert data['name'] == 'Sam'
 
 
 def test_get_user_info_from_db(app, _db):
@@ -132,8 +170,8 @@ def test_get_user_info_from_db_2(app, _db):
     assert student.intro == 'I am the best student!'
     assert student.frontendSkillScore == 5
     assert student.backendSkillScore == 4
-    assert student.server == 'x'
-    assert student.client == 'y'
+    assert student.server == 'Flask'
+    assert student.client == 'React'
     assert student.first == 'C'
     assert student.second == 'C++'
     assert student.third == 'Java'
@@ -152,20 +190,7 @@ def test_option_on_multiple_rules(app, client):
     assert sorted(rv.allow) == ["GET", "HEAD", "OPTIONS", "POST", "PUT"]
 
 
-# the folloing tests are placeholders
-# waiting for API implementation
-
-def test_getAllStudentsInfo():
-    pass
-
-def test_getAllIndividualRequests():
-    pass
-
-def test_sendIndividualRequest():
-    pass
-
-def test_sendGroupRequest():
-    pass
+# The following are Group API tests
 
 def test_get_all_group_info():
     pass
