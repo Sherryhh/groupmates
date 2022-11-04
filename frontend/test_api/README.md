@@ -551,5 +551,50 @@ response.status_code == 200
 
 
 
+## TEST #19: test searchByName()
+
+### Objective
+
+```
+we want to ensure searchByName() perform correctly and get a status_code = 200, and the userId corresponds to the name we are searching.
+```
+
+### Input
+
+```
+response = client.get('/api/v1/searchByName', json={
+        'name': "Sam"
+    })
+```
+
+### Desired Output
+
+```
+response.status_code == 200
+'userId' == 3
+```
+
+
+
+## TEST #20: test sortIndividuals()
+
+### Objective
+
+```
+we want to ensure sortIndividuals() perform correctly and get a status_code = 200
+```
+
+### Input
+
+```
+response = client.get('/api/v1/sortIndividuals')
+```
+
+### Desired Output
+
+```
+response.status_code == 200
+```
+
 
 

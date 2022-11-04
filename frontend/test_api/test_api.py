@@ -169,12 +169,24 @@ def test_option_on_multiple_rules(app, client):
 
 # All following tests are written in advance for unimplemented API endpoints
 
+def test_searchByName(client):
+    response = client.get('/api/v1/searchByName', json={
+        'name': "Sam"
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert 'userId' == 3
+
 def test_getAllStudentsInfo(client):
     response = client.get('/api/v1/getAllStudentsInfo')
     assert response.status_code == 200
     data = json.loads(response.get_data(as_text=True))
     assert data
     assert '3' in data
+
+def test_sortIndividuals(client):
+    response = client.get('/api/v1/sortIndividuals')
+    assert response.status_code == 200
 
 def test_getAllIndividualRequests(client):
     response = client.get('/api/v1/getAllIndividualRequests', json={
