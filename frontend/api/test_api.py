@@ -5,6 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 import pymysql
 from models import Student, Group
 
+# Use fixture to set Testing Context
+# The following are testing context
 
 @pytest.fixture(scope='session')
 def app():
@@ -73,7 +75,8 @@ def route_editFrameworks(app, client):
     def index4():
         return "Aha!"
 
-# The following are Student API tests
+
+# The following are Student API tests for each API endpoint
 
 def test_editUserInfo(client, route_editUserInfo):
     response = client.get('/api/v1/editUserInfo', json={
@@ -111,34 +114,6 @@ def test_editFrameworks(client, route_editFrameworks):
         'userId': 3,
         'server': "Flask",
         'client': "React"
-    })
-    assert response.status_code == 200
-
-def test_getAllStudentsInfo(client):
-    response = client.get('/api/v1/getAllStudentsInfo')
-    assert response.status_code == 200
-    data = json.loads(response.get_data(as_text=True))
-    assert data
-    assert '3' in data
-
-def test_getAllIndividualRequests(client):
-    response = client.get('/api/v1/getAllIndividualRequests', json={
-        'userId': 3
-    })
-    assert response.status_code == 200
-    data = json.loads(response.get_data(as_test=True))
-    assert data is not None
-
-def test_sendIndividualRequest(client):
-    response = client.post('/api/v1/sendIndividualRequest', json={
-        'userId': 3
-    })
-    assert response.status_code == 200
-
-def test_sendGroupRequest(client):
-    response = client.post('/api/v1/sendGroupRequest', json={
-        'userId': 3,
-        'groupId': 1
     })
     assert response.status_code == 200
 
@@ -190,7 +165,108 @@ def test_option_on_multiple_rules(app, client):
     assert sorted(rv.allow) == ["GET", "HEAD", "OPTIONS", "POST", "PUT"]
 
 
-# The following are Group API tests
+# All following tests are written in advance for unimplemented API endpoints
 
-def test_get_all_group_info():
+def test_getAllStudentsInfo(client):
+    response = client.get('/api/v1/getAllStudentsInfo')
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data
+    assert '3' in data
+
+def test_getAllIndividualRequests(client):
+    response = client.get('/api/v1/getAllIndividualRequests', json={
+        'userId': 3
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_test=True))
+    assert data is not None
+
+def test_sendIndividualRequest(client):
+    response = client.post('/api/v1/sendIndividualRequest', json={
+        'userId': 3
+    })
+    assert response.status_code == 200
+
+def test_sendGroupRequest(client):
+    response = client.post('/api/v1/sendGroupRequest', json={
+        'userId': 3,
+        'groupId': 1
+    })
+    assert response.status_code == 200
+
+
+# The following are Group API tests for each API endpoint
+
+def test_getGroupInfo(client):
+    response = client.get('/api/v1/getGroupInfo', json={
+        'groupId': 1
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data
+    assert data['groupId'] == 1
+
+def test_getAllGroupInfo(client):
+    response = client.get('/api/v1/getGroupInfo')
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data
+    assert data['1']
+
+def test_getAllGroupRequest(client):
+    response = client.get('/api/v1/getGroupInfo', json={
+        'groupId': 1
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data is not None
+
+def test_getAllMember(client):
+    response = client.get('/api/v1/getAllMember', json={
+        'groupId': 1
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data
+
+def test_changeGroupName(client):
+    response = client.post('/api/v1/getAllMember', json={
+        'groupId': 1,
+        'name': 'BugMakers'
+    })
+    assert response.status_code == 200
+
+    response = client.get('/api/v1/getGroupInfo', json={
+        'groupId': 1
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert data
+    assert data['name'] == 'BugMakers'
+
+def test_setMissingSkill(client):
+    pass
+
+# The following are IndividualRequest API tests for each API endpoint
+
+def test_acceptRequest(client):
+    response = client.post('/api/v1/acceptRequest', json={
+        'userId': 3,
+        'requestId': 2
+    })
+    assert response.status_code == 200
+
+def test_declineRequest(client):
+    response = client.post('/api/v1/declineRequest', json={
+        'userId': 3,
+        'requestId': 2
+    })
+    assert response.status_code == 200
+
+# The following are GroupRequest API tests for each API endpoint
+def test_groupAcceptRequest(client):
+    pass
+
+def test_groupDeclineRequest(client):
     pass
