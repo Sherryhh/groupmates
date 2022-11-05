@@ -69,8 +69,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#Student.Student.get_all_individual_requests"><code class="docutils literal notranslate"><span class="pre">Student.get_all_individual_requests()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Student.Student.get_all_students_info"><code class="docutils literal notranslate"><span class="pre">Student.get_all_students_info()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Student.Student.get_user_info"><code class="docutils literal notranslate"><span class="pre">Student.get_user_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.search_by_name"><code class="docutils literal notranslate"><span class="pre">Student.search_by_name()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Student.Student.send_group_request"><code class="docutils literal notranslate"><span class="pre">Student.send_group_request()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Student.Student.send_individual_request"><code class="docutils literal notranslate"><span class="pre">Student.send_individual_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.sort_individuals"><code class="docutils literal notranslate"><span class="pre">Student.sort_individuals()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -371,7 +373,7 @@ By default, it is empty when a new student is created.</p>
 <dd><p>This method returns all the individual requests the user received.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(list(json)) a list of individual requests instances</p>
+<dd class="field-odd"><p>(json) a list of individual requests instances</p>
 </dd>
 </dl>
 </dd></dl>
@@ -404,6 +406,20 @@ pre-defined structure.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.search_by_name">
+<span class="sig-name descname"><span class="pre">search_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_username</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.search_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns a list of student instances whose usernames match the target_username keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>target_username</strong> (<em>str</em>) – the username keyword of the target student</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(json)  a list of student in a pre-defined manner</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="Student.Student.send_group_request">
 <span class="sig-name descname"><span class="pre">send_group_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_group_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.send_group_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method sends a group request to the group with target group_id.</p>
@@ -421,6 +437,18 @@ pre-defined structure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>target_student_id</strong> (<em>int</em>) – the target student’s uid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.sort_individuals">
+<span class="sig-name descname"><span class="pre">sort_individuals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.sort_individuals" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns an ordered list of student instances sorted descending by their matching scores with this
+user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(json)  a list of student in a pre-defined manner ordered by matching scores</p>
 </dd>
 </dl>
 </dd></dl>
