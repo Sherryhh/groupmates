@@ -1,5 +1,5 @@
 import React, { PureComponent, useState, useEffect } from 'react'
-import { Table } from 'antd'
+import { Table, Button } from 'antd'
 import { t } from "@lingui/macro"
 import { Ellipsis, DropOption } from 'components'
 import styles from './List.less'
@@ -88,16 +88,23 @@ class List extends PureComponent {
         key: 'skill',
       },
       {
-        title: t`Options`,
+        title: t`Ask to Join?`,
         render: (text, record) => {
           return (
-            <DropOption
-              onMenuClick={e => this.handleMenuClick(record, e)}
-              menuOptions={[
-                { key: '1', name: t`Ask to Join` },
-                { key: '2', name: t`Hide this Group` },
-              ]}
-            />
+            // <DropOption
+            //   onMenuClick={e => this.handleMenuClick(record, e)}
+            //   menuOptions={[
+            //     { key: '1', name: t`Ask to Join` },
+            //     { key: '2', name: t`Hide this Group` },
+            //   ]}
+            // />
+            <Button
+            type="primary"
+                  onClick={() => {
+                  }}
+                >
+              Send
+            </Button>
           )
         },
       },
