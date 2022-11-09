@@ -5,6 +5,7 @@ import { Ellipsis, DropOption } from 'components'
 import styles from './List.less'
 import PropTypes from 'prop-types'
 import axios from 'axios';
+import { Link } from 'umi'
 
 class List extends PureComponent {
   constructor(props) {
@@ -19,12 +20,10 @@ class List extends PureComponent {
     this.displayGroupInfo()
   }
   handleMenuClick = (record) => {
-    const { onJoinItem, onLearnItem, onHideItem } = this.props
+    const { onJoinItem, onHideItem } = this.props
     if (e.key === '1') {
       onJoinItem(record.id)
     } else if (e.key === '2') {
-      onLearnItem(record.id)
-    } else if (e.key === '3') {
       onHideItem(record.id)
     }
   }
@@ -60,7 +59,7 @@ class List extends PureComponent {
   }
 
   render() {
-    const { onInviteItem, onJoinItem, onLearnItem, ...tableProps } = this.props
+    const { onInviteItem, onJoinItem, ...tableProps } = this.props
     const all_data = []
     for (let i = 0; i < this.a.length; i++) {
       const newItem = {
@@ -76,6 +75,7 @@ class List extends PureComponent {
         title: t`Team Name`,
         dataIndex: 'name',
         key: 'name',
+        render: (text, record)=><Link to={`post/${record.id}`}>{text}</Link>,
       },
       {
         title: t`Languages`,
@@ -95,8 +95,7 @@ class List extends PureComponent {
               onMenuClick={e => this.handleMenuClick(record, e)}
               menuOptions={[
                 { key: '1', name: t`Ask to Join` },
-                { key: '2', name: t`Learn More` },
-                { key: '3', name: t`Hide this Group` }
+                { key: '2', name: t`Hide this Group` },
               ]}
             />
           )
@@ -126,6 +125,5 @@ class List extends PureComponent {
 List.propTypes = {
   onJoinItem: PropTypes.func,
   onHideItem: PropTypes.func,
-  onLearnItem: PropTypes.func,
 }
 export default List

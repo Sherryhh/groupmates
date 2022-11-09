@@ -34,8 +34,6 @@ class Post extends PureComponent {
       },
       onHideItem(page) {
       },
-      onLearnItem(page) {
-      },
     }
   }
 
