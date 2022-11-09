@@ -1,4 +1,6 @@
-from ..index import db
+import sys
+sys.path.append("..")
+from index import db
 
 class Student(db.Model):
 
@@ -18,8 +20,9 @@ class Student(db.Model):
     client = db.Column(db.String(255))
     frontendSkillScore = db.Column(db.Integer)
     backendSkillScore = db.Column(db.Integer)
+    open = db.Column(db.Integer)
 
-    def __init__(self, name, email, year, major, intro, first, second, third, server, client, frontendSkillScore, backendSkillScore):
+    def __init__(self, name, email, year, major, intro, first, second, third, server, client, frontendSkillScore, backendSkillScore, open):
         self.name = name
         self.email = email
         self.year = year
@@ -32,6 +35,7 @@ class Student(db.Model):
         self.client = client
         self.frontendSkillScore = frontendSkillScore
         self.backendSkillScore = backendSkillScore
+        self.open = open
 
     def getUserInfo(self):
         return {"name":self.name, "email":self.email, "year":self.year, "major": self.major, "intro": self.intro,     \

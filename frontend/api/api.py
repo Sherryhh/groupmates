@@ -1,6 +1,3 @@
-from queue import PriorityQueue
-import time
-from tokenize import group
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from index import app, db
@@ -108,6 +105,17 @@ def get_all_group_info():
         res.append({"key":group.id, "name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill})
     return res, 200
 
+@app.route('/api/v1/getAllUserInfo', methods=['GET'])
+def get_all_user_info():
+    isOpen = request.args.get('open')
+    students = Student.query.filter_by(open=isOpen).all()
+    res = []
+    for student in students:
+        res.append({"id": student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
+        'first':student.first, 'second':student.second, 'third':student.third, \
+        'server':student.server, 'client':student.client})
+    return res, 200
+    
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

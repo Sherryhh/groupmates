@@ -1,4 +1,6 @@
-from ..index import db
+import sys
+sys.path.append("..")
+from index import db
 
 class Group(db.Model):
 

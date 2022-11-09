@@ -4,15 +4,15 @@ import qs from 'qs'
 const { ApiPrefix } = Constant
 
 let usersListData = Mock.mock({
-  'data|10-20': [
-    {
-      id: '@id',
-      name: '@name',
-      grade: '123',
-      language: '456',
-      email: '@email',
-      frameworks: '789',
-    },
+  'data|10': [
+    // {
+    //   id: '@id',
+    //   name: '@name',
+    //   grade: '123',
+    //   language: '456',
+    //   email: '@email',
+    //   frameworks: '789',
+    // },
   ],
 })
 
