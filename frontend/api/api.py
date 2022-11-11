@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from index import app, db
-from models import Group
+from model.group import Group
 from model.student import Student
 import sys
 
@@ -10,7 +10,6 @@ import sys
 @app.route('/api/v1/getUserInfo', methods=['GET'])
 def get_user_info():
     userId  = request.args.get('userId')
-    print(userId)
     student = Student.query.filter_by(id=userId).first()
     res = student.getUserInfo()
     return res, 200

@@ -88,7 +88,7 @@ class List extends PureComponent {
         key: 'skill',
       },
       {
-        title: t`Ask to Join?`,
+        title: t`Join Request`,
         render: (text, record) => {
           return (
             // <DropOption

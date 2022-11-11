@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal, Avatar } from 'antd'
+import { Table, Modal, Button } from 'antd'
 import { DropOption } from 'components'
 import { t } from "@lingui/macro"
 import { Trans } from "@lingui/macro"
@@ -145,6 +145,7 @@ class List extends PureComponent {
         title: <Trans>Name</Trans>,
         dataIndex: 'name',
         key: 'name',
+        render: (text, record)=><Link to={`user/${record.id}`}>{text}</Link>,
       },
       { 
         title: <Trans>Email</Trans>,
@@ -167,18 +168,25 @@ class List extends PureComponent {
         key: 'skill',
       },
       {
-        title: <Trans>Option</Trans>,
+        title: <Trans>Invitation</Trans>,
         key: 'operation',
         fixed: 'right',
         render: (text, record) => {
           return (
-            <DropOption
-              onMenuClick={e => this.handleMenuClick(record, e)}
-              menuOptions={[
-                { key: '1', name: t`Send Invite` },
-                { key: '2', name: t`Hide this Person` }
-              ]}
-            />
+            // <DropOption
+            //   onMenuClick={e => this.handleMenuClick(record, e)}
+            //   menuOptions={[
+            //     { key: '1', name: t`Send Invite` },
+            //     { key: '2', name: t`Hide this Person` }
+            //   ]}
+            // />
+            <Button
+            type="primary"
+                  onClick={() => {
+                  }}
+                >
+              Send
+            </Button>
           )
         },
       },
