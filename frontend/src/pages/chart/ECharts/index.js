@@ -24,6 +24,7 @@ class Chart extends PureComponent {
       membersId:[],
       membersName:[],
       membersEmail:[],
+      groupId: 0,
     }
     this.getGroupInfo();
   }
@@ -54,6 +55,7 @@ class Chart extends PureComponent {
             membersEmail.push(response['data']['members'][index].email)
           }
           this.setState({
+              groupId: response['data']['groupId'],
               hasGroup: true,
               name: response['data']['name'],
               language: response['data']['language'],
@@ -71,13 +73,41 @@ class Chart extends PureComponent {
       });
   };
 
+  editGroupInfo(){
+    const url = '/api/v1/editGroupInfo';
+    axios.get(url,{
+      params: {
+        groupId: this.state.groupId,
+        name:this.state.name,
+        language:this.state.language,
+        skill:this.state.skill,
+      },
+    }).then((response) => {
+      console.log(response)
+    }).catch(error => {
+        console.log('Edit group information', error);
+    });
+};
+
   componentDidMount() {
     this.getGroupInfo();
   }
 
   handleMenuClick = (record, e) => {
     console.log(record.name)
-  }
+    const url = '/api/v1/editGroupLeader';
+    axios.get(url,{
+      params: {
+        groupId: this.state.groupId,
+        leader:record.name,
+      },
+    }).then((response) => {
+      console.log(response)
+      this.getGroupInfo()
+    }).catch(error => {
+        console.log('Edit group leader', error);
+    });
+  };
 
   render() {
     const members = []
@@ -138,6 +168,7 @@ class Chart extends PureComponent {
             type="primary"
                   onClick={() => {
                     this.setState({ basicInfoediting: false });
+                    this.editGroupInfo();
                   }}
                 >
                   submit
