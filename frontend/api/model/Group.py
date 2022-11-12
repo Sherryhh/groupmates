@@ -17,7 +17,6 @@ class Group(db.Model):
     members = db.relationship('Student', backref='group', lazy=True)
     groupRequests = db.relationship('GroupRequest', backref = 'group', lazy = 'dynamic', foreign_keys = 'GroupRequest.receiver')
 
-
     def __init__(self, open, name, leader, language, skill):
         self.open = open
         self.name = name
