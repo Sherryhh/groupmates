@@ -21,6 +21,7 @@ class Student(db.Model):
     frontendSkillScore = db.Column(db.Integer)
     backendSkillScore = db.Column(db.Integer)
     open = db.Column(db.Integer)
+    groupId = db.Column(db.Integer, db.ForeignKey('group.id'))
 
     def __init__(self, name, email, year, major, intro, first, second, third, server, client, frontendSkillScore, backendSkillScore, open):
         self.name = name

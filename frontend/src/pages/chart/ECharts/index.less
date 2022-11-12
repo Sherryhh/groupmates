@@ -1,34 +1,51 @@
-.chart {
-  label {
-    margin: 24px 0;
-    display: block;
-    font-size: 14px;
-  }
-
-  pre {
-    padding: 16px;
-    overflow: auto;
-    font-size: 12px;
-    line-height: 2;
-    background-color: #f6f8fa;
-    border-radius: 3px;
-
-    code {
-      display: inline;
-      max-width: auto;
-      padding: 0;
-      margin: 0;
-      overflow: visible;
-      line-height: inherit;
-      word-wrap: normal;
-      background-color: transparent;
-      border: 0;
+.dashboard {
+  position: relative;
+  :global {
+    .ant-card {
+      border-radius: 0;
+      margin-bottom: 24px;
+      &:hover {
+        box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+      }
+    }
+    .ant-card-body {
+      overflow-x: hidden;
     }
   }
-}
 
-:global {
-  .ant-radio-wrapper {
-    margin-bottom: 16px;
+  .weather {
+    &:hover {
+      box-shadow: 4px 4px 40px rgba(143, 201, 251, 0.6);
+    }
+  }
+
+  .quote {
+    color: #000000;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .form {
+    color: #000000;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .info {
+    color: #000000;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    font-size: 15px;
+  }
+
+  .edit {
+    float: right;
   }
 }

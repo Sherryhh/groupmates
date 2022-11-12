@@ -102,7 +102,8 @@ def get_all_group_info():
     res = []
     for group in groups:
         res.append({"key":group.id, "name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill})
-    return res, 200
+    print(res)
+    return jsonify(res), 200
 
 @app.route('/api/v1/getAllUserInfo', methods=['GET'])
 def get_all_user_info():
@@ -113,10 +114,32 @@ def get_all_user_info():
         res.append({"id": student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
         'first':student.first, 'second':student.second, 'third':student.third, \
         'server':student.server, 'client':student.client})
-    return res, 200
-    
+    return jsonify(res), 200
+
+@app.route('/api/v1/getGroupInfo', methods=['GET'])
+def get_group_info():
+    userId = request.args.get('userId')
+    student = Student.query.filter_by(id=userId).first()
+    if student.open == 0:
+        return {"hasGroup":False}, 200
+    group = Group.query.filter_by(id=student.groupId).first()
+    members = []
+    for student in group.members:
+        members.append({"id": student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
+        'first':student.first, 'second':student.second, 'third':student.third, \
+        'server':student.server, 'client':student.client})
+    return {"hasGroup":True,"name":group.name, "leader":group.leader, "language":group.language, "skill":group.skill,"members":members}
+
+@app.route('/api/v1/getRequest', methods=['GET'])
+def get_request():
+    userId = request.args.get('id')
+    requests = Request.query.filter_by(receiver=userId).all()
+    res = []
+    for request in requests:
+        res.append({"id": request.id})
+    return jsonify(res), 200
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug = True)
-    print(sys.__doc__)

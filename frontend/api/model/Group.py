@@ -13,6 +13,7 @@ class Group(db.Model):
     leader = db.Column(db.String(255))
     language = db.Column(db.String(255))
     skill = db.Column(db.String(255))
+    members = db.relationship('Student', backref='group', lazy=True)
 
     def __init__(self, open, name, leader, language, skill):
         self.open = open
