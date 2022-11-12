@@ -103,7 +103,6 @@ def get_all_group_info():
     res = []
     for group in groups:
         res.append({"key":group.id, "name":group.name, "leader":group.leader, "language":group.language, "skill": group.skill})
-    print(res)
     return jsonify(res), 200
 
 @app.route('/api/v1/getAllUserInfo', methods=['GET'])
@@ -166,6 +165,16 @@ def get_request():
     else:
         group = Group.query.filter_by(id=student.groupId).first()
         res = group.getAllGroupRequests()
+    return jsonify(res), 200
+
+@app.route('/api/v1/sortIndividuals', methods=['GET'])
+def sortIndividuals():
+    userId  = request.args.get('userId')
+    isOpen = request.args.get('open')
+    cur = Student.query.filter_by(id=userId).first()
+    students = Student.query.filter_by(open=isOpen).all()
+    res = cur.sortIndividuals(students)
+    print(res)
     return jsonify(res), 200
 
 if __name__ == '__main__':

@@ -10,6 +10,7 @@ import List from './components/List'
 import Filter from './components/Filter'
 import Modal from './components/Modal'
 
+
 @connect(({ user, loading }) => ({ user, loading }))
 class User extends PureComponent {
   handleRefresh = newQuery => { //reset
@@ -27,25 +28,6 @@ class User extends PureComponent {
       ),
     })
   }
-
-  // handleDeleteItems = () => {
-  //   const { dispatch, user } = this.props
-  //   const { list, pagination, selectedRowKeys } = user
-
-  //   dispatch({
-  //     type: 'user/multiDelete',
-  //     payload: {
-  //       ids: selectedRowKeys,
-  //     },
-  //   }).then(() => {
-  //     this.handleRefresh({
-  //       page:
-  //         list.length === selectedRowKeys.length && pagination.current > 1
-  //           ? pagination.current - 1
-  //           : pagination.current,
-  //     })
-  //   })
-  // }
 
   get modalProps() {
     const { dispatch, user, loading } = this.props

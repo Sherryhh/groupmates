@@ -70,7 +70,7 @@ class Filter extends Component {
           <Col {...ColProps} xl={{ span: 4 }} md={{ span: 1 }}>
             <Form.Item name="name">
               <Search
-                placeholder={t`Search Name`}
+                placeholder={'Search Name'}
                 onSearch={this.handleSubmit}
               />
             </Form.Item>
@@ -88,14 +88,14 @@ class Filter extends Component {
                   className="margin-right"
                   onClick={this.handleSubmit}
                 >
-                  <Trans>Search</Trans>
+                  Search
                 </Button>
                 <Button onClick={this.handleReset}>
-                  <Trans>Reset</Trans>
+                  Reset
                 </Button>
               </div>
               <Button type="ghost" onClick={onSort}>
-                <Trans>Sort</Trans>
+                Sort
               </Button>
             </Row>
           </Col>

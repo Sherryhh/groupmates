@@ -8,6 +8,7 @@ import { Link } from 'umi'
 import styles from './List.less'
 import axios from 'axios'
 import e from 'cors'
+import store from 'store'
 const { confirm } = Modal
 
 class List extends PureComponent {
@@ -47,9 +48,10 @@ class List extends PureComponent {
 
   displayUserInfo() {
     console.log('get all user info')
-    const url = '/api/v1/getAllUserInfo';
+    const url = '/api/v1/sortIndividuals';
     axios.get(url,{
       params: {
+        userId: store.get('user').id,
         open: 1,
       },                                   
     }).then((response) => {

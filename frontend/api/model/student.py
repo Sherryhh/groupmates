@@ -1,6 +1,7 @@
 import sys
 sys.path.append("..")
 from index import db
+import json
 
 class Student(db.Model):
 
@@ -102,3 +103,30 @@ class Student(db.Model):
 
     def sendGroupRequest(targetGroupId):
         pass
+
+    def sortIndividuals(self, allStudents):
+        currLanuages = set([self.first, self.second, self.third])
+        yearConvert = {"Freshman": 1, "Sophomore": 2, "Junior": 3, "Senior": 4}
+        dictStudents = []
+        for student in allStudents:
+            d = {"name":student.name, "email":student.email, "year":student.year, "major": student.major, "intro": student.intro,     \
+                'first':student.first, 'second':student.second, 'third':student.third, \
+                'server':student.server, 'client':student.client, \
+                'frontendSkillScore':student.frontendSkillScore, 'backendSkillScore':student.backendSkillScore, 'total': 0}
+            sLanuages = set([student.first, student.second, student.third])
+            languageScore = len(currLanuages.intersection(sLanuages))/len(currLanuages.union(sLanuages))*0.25
+            if self.first == student.first:
+                languageScore += 0.25
+            if self.second == student.second:
+                languageScore += 0.25
+            if self.third == student.third:
+                languageScore += 0.25
+            crossScore = (self.backendSkillScore * student.frontendSkillScore + self.frontendSkillScore * student.backendSkillScore)/50
+            gradeScore = 1 - abs(yearConvert[self.year] - yearConvert[student.year])/4
+            totalScore = languageScore*0.4+crossScore*0.4+gradeScore*0.2
+            d['total'] = totalScore
+            dictStudents.append(d)
+        return sorted(dictStudents, key=lambda student: student['total'], reverse=True)
+
+
+
