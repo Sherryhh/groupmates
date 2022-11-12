@@ -1,6 +1,5 @@
 import React, { PureComponent, useState, useEffect } from 'react'
 import { Table, Button } from 'antd'
-import { t } from "@lingui/macro"
 import { Ellipsis, DropOption } from 'components'
 import styles from './List.less'
 import PropTypes from 'prop-types'
@@ -72,30 +71,30 @@ class List extends PureComponent {
     }
     const columns = [
       {
-        title: t`Team Name`,
+        title: 'Team Name',
         dataIndex: 'name',
         key: 'name',
         render: (text, record)=><Link to={`post/${record.id}`}>{text}</Link>,
       },
       {
-        title: t`Languages`,
+        title: 'Languages',
         dataIndex: 'language',
         key: 'language',
       },
       {
-        title: t`Looking for...`,
+        title: 'Looking for...',
         dataIndex: 'skill',
         key: 'skill',
       },
       {
-        title: t`Join Request`,
+        title: 'Join Reques',
         render: (text, record) => {
           return (
             // <DropOption
             //   onMenuClick={e => this.handleMenuClick(record, e)}
             //   menuOptions={[
-            //     { key: '1', name: t`Ask to Join` },
-            //     { key: '2', name: t`Hide this Group` },
+            //     { key: '1', name: 'Ask to Join` },
+            //     { key: '2', name: 'Hide this Group` },
             //   ]}
             // />
             <Button
@@ -115,7 +114,7 @@ class List extends PureComponent {
         {...tableProps}
         pagination={{
           ...tableProps.pagination,
-          showTotal: total => t`Total ${total} Items`,
+          showTotal: total => `Total ${total} Items`,
         }}
         bordered
         scroll={{ x: 1200 }}

@@ -30,14 +30,14 @@ class List extends PureComponent {
 
     if (e.key === '1') {
       confirm({
-        title: t`Are you sure to send invitation?`,
+        title: 'Are you sure to send invitation?',
         onOk() {
           onInviteItem(record.id)
         },
       })
     } else if (e.key == '2') {
       confirm({
-        title: t`Are you sure to hide this person?`,
+        title: 'Are you sure to hide this person?',
         onOk() {
           onHideItem(record.id)
         },
@@ -142,33 +142,33 @@ class List extends PureComponent {
 
     const columns = [
       {
-        title: <Trans>Name</Trans>,
+        title: 'Name',
         dataIndex: 'name',
         key: 'name',
         render: (text, record)=><Link to={`user/${record.id}`}>{text}</Link>,
       },
       { 
-        title: <Trans>Email</Trans>,
+        title: 'Email',
         dataIndex: 'email',
         key: 'email',
       },
       {
-        title: <Trans>Grade</Trans>,
+        title: 'Grade',
         dataIndex: 'grade',
         key: 'grade',
       },
       {
-        title: <Trans>Programming Language</Trans>,
+        title: 'Programming Language',
         dataIndex: 'language',
         key: 'language',
       },
       {
-        title: <Trans>Frameworks</Trans>,
+        title: 'Frameworks',
         dataIndex: 'skill',
         key: 'skill',
       },
       {
-        title: <Trans>Invitation</Trans>,
+        title: 'Invitation',
         key: 'operation',
         fixed: 'right',
         render: (text, record) => {
