@@ -120,7 +120,7 @@ def get_all_user_info():
 def get_group_info():
     userId = request.args.get('userId')
     student = Student.query.filter_by(id=userId).first()
-    if student.open == 0:
+    if student.open == 1:
         return {"hasGroup":False}, 200
     group = Group.query.filter_by(id=student.groupId).first()
     members = []
