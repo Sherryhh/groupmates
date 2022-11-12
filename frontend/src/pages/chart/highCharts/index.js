@@ -1,50 +1,152 @@
 import React, {PureComponent} from 'react'
 import { Page } from 'components'
-import { Table, Button } from 'antd'
+import { Table, Button, Row } from 'antd'
 import styles from './index.less'
 import { t } from "@lingui/macro"
 import PropTypes from 'prop-types'
 import { DropOption } from 'components'
 import { Link } from 'umi'
+import store from 'store'
+import axios from 'axios';
 
 class Chart extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       type: '',
+      userId: store.get('user').id,
+      requests: [],
     }
   }
 
   handleMenuClick = (record, e) => {
   }
 
+  getProgrammngLanguage(data){
+    let languages = []
+    console.log(data.first)
+    if (data.first != "") {
+      languages.push(data.first)
+    }
+    if (data.second != "") {
+      languages.push(data.second)
+    }
+    if (data.third != "") {
+      languages.push(data.third)
+    }
+    if (languages.length == 0) {
+      return ""
+    } else {
+      let language = languages[0]
+      for (let j = 1; j < languages.length; j++) {
+        language = language + ", " + languages[j]
+      }
+      return language
+    }
+  }
+
+  getSkills(data){
+    let s = ""
+    if (data.server != "") {
+      let all_s = JSON.parse(data.server)
+      s = all_s[0]
+      for (let j = 1; j < all_s.length; j++) {
+        s = s + ", " + all_s[j]
+      }
+    }
+    let c = ""
+    if (data.client != "") {
+      let all_c = JSON.parse(data.client)
+      c = all_c[0]
+      for (let j = 1; j < all_c.length; j++) {
+        c = c + ", " + all_c[j]
+      }
+    }
+    if (s == "" && c == ""){
+      return ""
+    } else if (s == "") {
+      return c
+    } else if (c == "") {
+      return s
+    } else {
+      return s+", "+c
+    }
+  }
+
+  getRequestInfo(){
+    console.log('get request info')
+    const url = '/api/v1/getRequest';
+    axios.get(url,{
+      params: {
+        userId: this.state.userId,
+      },
+    }).then((response) => {
+      let data = response['data']
+      console.log(data)
+      let requests = []
+      for (let index = 0; index < data.length; index++) {
+        const newItem = {
+          "id": data[index].id,
+          "studentId": data[index].studentId,
+          "name": data[index].name,
+          "email": data[index].email,
+          "major": data[index].major,
+          "year": data[index].year,
+          "languages": this.getProgrammngLanguage(data[index]),
+          "skills": this.getSkills(data[index]),
+        }
+        requests.push(newItem)
+      }
+      this.setState({
+        requests: requests
+      })
+      console.log(this.state.requests)
+    }).catch(error => {
+        console.log('Get request info', error);
+    });
+  }
+
+  componentDidMount() {
+    this.getRequestInfo();
+  }
+
   render() {
     const {...tableProps } = this.props
-    const all_data = [
-      {"id":1, "type": "group", "name":"Apple", "language":"Python", "skill":"React"},
-      {"id":3, "type": "student", "name":"Dexter", "language":"Python", "skill":"Flask"}
-    ]
     const columns = [
       {
-        title: 'Name',
+        title: 'Student Name',
         dataIndex: 'name',
         key: 'name',
         render: (text, record)=><Link to={`user/${record.id}`}>{text}</Link>,
       },
       {
-        title: 'Programming Language',
-        dataIndex: 'language',
-        key: 'language',
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
       },
       {
-        title: 'Frameworks',
-        dataIndex: 'skill',
-        key: 'skill',
+        title: 'Major',
+        dataIndex: 'major',
+        key: 'major',
       },
       {
-        title: 'Request',
+        title: 'Grade',
+        dataIndex: 'year',
+        key: 'year',
+      },
+      {
+        title: 'Programming Languages',
+        dataIndex: 'languages',
+        key: 'languages',
+      },
+      {
+        title: 'Skills',
+        dataIndex: 'skills',
+        key: 'skills',
+      },
+      {
+        title: 'Action',
         key: 'operation',
-        fixed: 'right',
         render: (text, record) => {
           return (
             <DropOption
@@ -69,7 +171,7 @@ class Chart extends PureComponent {
         bordered
         scroll={{ x: 1200 }}
         className={styles.table}
-        dataSource={all_data}
+        dataSource={this.state.requests}
         columns={columns}
         simple
         rowKey={record => record.id}

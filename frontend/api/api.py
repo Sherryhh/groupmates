@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from index import app, db
 from model.group import Group
 from model.student import Student
+from model.request import IndividualRequest
 import sys
 
 # userInfo = {'name':'Emma', 'email':'emma@g.ucla.edu', 'year':'Freshman', 'major':'Computer Science', 'intro':'123', 'first':'Java', 'second':'Python', 'third':'C++'}
@@ -158,11 +159,13 @@ def edit_group_leader():
 
 @app.route('/api/v1/getRequest', methods=['GET'])
 def get_request():
-    userId = request.args.get('id')
-    requests = Request.query.filter_by(receiver=userId).all()
-    res = []
-    for request in requests:
-        res.append({"id": request.id})
+    userId = request.args.get('userId')
+    student = Student.query.filter_by(id=userId).first()
+    if student.open == 1: # return group requests
+        res = student.getAllIndividualRequests()
+    else:
+        group = Group.query.filter_by(id=student.groupId).first()
+        res = group.getAllGroupRequests()
     return jsonify(res), 200
 
 if __name__ == '__main__':

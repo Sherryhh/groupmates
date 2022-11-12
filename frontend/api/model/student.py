@@ -22,6 +22,7 @@ class Student(db.Model):
     backendSkillScore = db.Column(db.Integer)
     open = db.Column(db.Integer)
     groupId = db.Column(db.Integer, db.ForeignKey('group.id'))
+    individualRequests = db.relationship('IndividualRequest', backref = 'student', lazy = 'dynamic', foreign_keys = 'IndividualRequest.receiver')
 
     def __init__(self, name, email, year, major, intro, first, second, third, server, client, frontendSkillScore, backendSkillScore, open):
         self.name = name
@@ -76,11 +77,25 @@ class Student(db.Model):
         except:
             return False
 
+
     def getAllStudentsInfo():
         pass
 
-    def getAllIndividualRequests():
-        pass
+    def getAllIndividualRequests(self):
+        res = []
+        for r in self.individualRequests:
+            # check whether the request is already inactive (already accepted or declined)
+            if r.status == 0:
+                continue
+            studentId = r.sender
+            student = Student.query.filter_by(id=studentId).first()
+            # check whether the student has already joined a group
+            if student.open == 0:
+                continue
+            res.append({"id": r.id, "studentId":student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
+            'first':student.first, 'second':student.second, 'third':student.third, \
+            'server':student.server, 'client':student.client})
+        return res
 
     def sendIndividualRequest(targetStudentId):
         pass
