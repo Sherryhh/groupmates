@@ -21,3 +21,19 @@ class Group(db.Model):
         self.leader = leader
         self.language = language
         self.skill = skill
+
+    def editGroupInfo(self, query, name, language, skill):
+        query.update({'name':name, 'language':language, "skill":skill})
+        try:
+            db.session.commit()
+            return True
+        except:
+            return False
+
+    def editGroupLeader(self, query, leader):
+        query.update({'leader':leader})
+        try:
+            db.session.commit()
+            return True
+        except:
+            return False

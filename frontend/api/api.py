@@ -128,7 +128,33 @@ def get_group_info():
         members.append({"id": student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
         'first':student.first, 'second':student.second, 'third':student.third, \
         'server':student.server, 'client':student.client})
-    return {"hasGroup":True,"name":group.name, "leader":group.leader, "language":group.language, "skill":group.skill,"members":members}
+    return {"groupId":group.id, "hasGroup":True,"name":group.name, "leader":group.leader, "language":group.language, "skill":group.skill,"members":members}
+
+@app.route('/api/v1/editGroupInfo',methods=['GET'])
+def edit_group_info():
+    groupId  = request.args.get('groupId')
+    name  = request.args.get('name')
+    language = request.args.get('language')
+    skill = request.args.get('skill')
+    query = Group.query.filter_by(id=groupId)
+    group = query.first()
+    success = group.editGroupInfo(query, name, language, skill)
+    if success:
+        return {"msg":"Edit successfully!"},200
+    else:
+        return {"msg":"Unable to update group info."}, 500
+
+@app.route('/api/v1/editGroupLeader',methods=['GET'])
+def edit_group_leader():
+    groupId  = request.args.get('groupId')
+    leader = request.args.get('leader')
+    query = Group.query.filter_by(id=groupId)
+    group = query.first()
+    success = group.editGroupLeader(query, leader)
+    if success:
+        return {"msg":"Edit successfully!"},200
+    else:
+        return {"msg":"Unable to update group leader."}, 500
 
 @app.route('/api/v1/getRequest', methods=['GET'])
 def get_request():
