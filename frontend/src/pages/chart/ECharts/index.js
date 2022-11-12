@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react'
 import { Page } from 'components'
-import { Row, Col, Card, Form, Input, Select, Button} from 'antd'
+import { Row, Col, Card, Form, Input, Select, Button, Table} from 'antd'
 import styles from './index.less'
 const FormItem = Form.Item;
 import store from 'store'
 import axios from 'axios';
-
+import { t } from "@lingui/macro"
+import PropTypes from 'prop-types'
+import { DropOption } from 'components'
 
 class Chart extends PureComponent {
   constructor() {
@@ -18,6 +20,10 @@ class Chart extends PureComponent {
       hasGroup:false,
       userId: store.get('user').id,
       members:[],
+      leader: "",
+      membersId:[],
+      membersName:[],
+      membersEmail:[],
     }
     this.getGroupInfo();
   }
@@ -33,6 +39,9 @@ class Chart extends PureComponent {
         console.log(response)
         if(response['data']['hasGroup'] == true){
           const members = []
+          let membersId = []
+          let membersName = []
+          let membersEmail = []
           for (let index = 0; index < response['data']['members'].length; index++) {
             const newItem = {
               "id": response['data']['members'][index].id,
@@ -40,13 +49,20 @@ class Chart extends PureComponent {
               "email": response['data']['members'][index].email,
             }
             members.push(newItem)
+            membersId.push(response['data']['members'][index].id)
+            membersName.push(response['data']['members'][index].name)
+            membersEmail.push(response['data']['members'][index].email)
           }
           this.setState({
               hasGroup: true,
               name: response['data']['name'],
               language: response['data']['language'],
               skill: response['data']['skill'],
+              leader: response['data']['leader'],
               members:members,
+              membersId:membersId,
+              membersName:membersName,
+              membersEmail:membersEmail,
           })
           console.log(this.state.members)
         }
@@ -59,7 +75,47 @@ class Chart extends PureComponent {
     this.getGroupInfo();
   }
 
+  handleMenuClick = (record, e) => {
+    console.log(record.name)
+  }
+
   render() {
+    const members = []
+    for (let i = 0; i < this.state.membersId.length; i++) {
+      const newItem = {
+        "id": this.state.membersId[i],
+        "name": this.state.membersName[i],
+        "email": this.state.membersEmail[i],
+      }
+      members.push(newItem)
+    }
+    const {...tableProps } = this.props
+    const columns = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+      },
+      {
+        title: 'Leader',
+        key: 'operation',
+        render: (text, record) => {
+          return (
+            <DropOption
+              onMenuClick={e => this.handleMenuClick(record, e)}
+              menuOptions={[
+                { key: '1', name: t`Select as Leader` }
+              ]}
+            />
+          )
+        },
+      },
+    ]
     return (
       <Page
         // loading={loading.models.dashboard && sales.length === 0}
@@ -151,27 +207,28 @@ class Chart extends PureComponent {
             </FormItem>
             </Row>
             <FormItem style={{ margin: "10px", width: "300px" }}>
+            Group Leader
+            <Input
+              disabled = {true}
+              value={this.state.leader}
+            />
+            </FormItem>
+            <FormItem style={{ margin: "10px", width: "1000px" }}>
             Group Members
-            <div className={styles.info}>
-            <table>
-                <thead>
-                  <tr>
-                  <th>id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {this.state.members.map((d) => (
-                    <tr key={d.id}>
-                      <td>{d.id}</td>
-                      <td>{d.name}</td>
-                      <td>{d.email}</td>
-                    </tr>
-                  ))}
-                  </tbody>
-              </table>
-            </div>
+            <Table
+            {...tableProps}
+            pagination={{
+              ...tableProps.pagination,
+              showTotal: total => t`Total ${total} Items`,
+            }}
+            bordered
+            scroll={{ x: 1200 }}
+            className={styles.table}
+            dataSource={members}
+            columns={columns}
+            simple
+            rowKey={record => record.id}
+          />
             </FormItem>
             </Form>
             </div>
