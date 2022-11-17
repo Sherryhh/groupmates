@@ -1,0 +1,2 @@
+[{"id":3, "name":"Dexter", "email":"sicheng2020@g.ucla.edu", "year":"Sophomore", "major":"Electrical and Computer Engineering", "frontendSkillScore":5, "backendSkillScore":5, "first":"Python", "second":"Java", "third":"C++", "server":"[\"Flask\"]", "client":"[\"React\"]", "intro":"I want to die! Who can save me, God!!", "open":1},
+ {"id":4, "name":"Emma", "email":" emma@g.ucla.edu", "year":"Senior", "major":"CS", "frontendSkillScore":5, "backendSkillScore":5, "first":"", "second":"", "third":"", "server":"", "client":"", "intro":"", "open":1}]
