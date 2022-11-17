@@ -19,7 +19,7 @@
 
 ```bash
 git clone https://github.com/Sherryhh/groupmates
-cd groupmates
+cd groupmates/frontend
 ```
 
 2. Installation dependence.
@@ -37,12 +37,11 @@ npm install
 3. Running the application
 
 ```bash
-cd frontend
 npm run start
 ```
 In a different tab (please change password accordingly in the `frontend/api/index.js`)
 ```bash
-cd frontend/api
+cd api
 python3 -m flask run
 ```
 
