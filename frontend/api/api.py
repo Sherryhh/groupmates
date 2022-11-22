@@ -198,6 +198,17 @@ def sendIndividualRequest():
     else:
         return {"msg":"Unable to send."}, 500
 
+@app.route('/api/v1/sendGroupRequest', methods=['GET'])
+def sendGroupRequest():
+    userId = request.args.get('userId')
+    target = request.args.get('target')
+    student = Student.query.filter_by(id=userId).first()
+    success = student.sendGroupRequest(target)
+    if success:
+        return {"msg":"Send successfully!"},200
+    else:
+        return {"msg":"Unable to send."}, 500
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

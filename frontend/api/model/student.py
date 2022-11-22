@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 from index import db
 import json
-from model.request import IndividualRequest
+from model.request import IndividualRequest, GroupRequest
 
 class Student(db.Model):
 
@@ -108,8 +108,14 @@ class Student(db.Model):
         except:
             return False
 
-    def sendGroupRequest(targetGroupId):
-        pass
+    def sendGroupRequest(self, targetGroupId):
+        r = GroupRequest(self.id, targetGroupId, 1)
+        try:
+            db.session.add(r)
+            db.session.commit()
+            return True
+        except:
+            return False
 
     def sortIndividuals(self, allStudents):
         currLanuages = set([self.first, self.second, self.third])
