@@ -2,6 +2,7 @@ import sys
 sys.path.append("..")
 from index import db
 import json
+from model.request import IndividualRequest
 
 class Student(db.Model):
 
@@ -98,8 +99,14 @@ class Student(db.Model):
             'server':student.server, 'client':student.client})
         return res
 
-    def sendIndividualRequest(targetStudentId):
-        pass
+    def sendIndividualRequest(self, targetStudentId):
+        r = IndividualRequest(self.id, targetStudentId, 1)
+        try:
+            db.session.add(r)
+            db.session.commit()
+            return True
+        except:
+            return False
 
     def sendGroupRequest(targetGroupId):
         pass

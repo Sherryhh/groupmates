@@ -62,6 +62,12 @@ const adminUsers = [
     password: '123456',
     permissions: userPermission.DEFAULT,
   },
+  {
+    id: 7,
+    username: 'Sherry',
+    password: '123456',
+    permissions: userPermission.DEFAULT,
+  },
 ]
 
 const queryArray = (array, key, keyAlias = 'key') => {

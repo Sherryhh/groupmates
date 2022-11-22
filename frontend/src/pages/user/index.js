@@ -20,6 +20,7 @@ class User extends PureComponent {
       search: false,
       all_data: [],
       old_data: [],
+      disabled: [],
     }
     this.displayUserInfo()
   }
@@ -91,7 +92,7 @@ class User extends PureComponent {
   }
 
   displayUserInfo() {
-    console.log('get all user info')
+    console.log('get all users')
     const url = '/api/v1/sortIndividuals';
     axios.get(url,{
       params: {
@@ -123,7 +124,7 @@ class User extends PureComponent {
   }
 
   getSearchList(){
-    console.log('get all user info')
+    console.log('update users')
     const url = '/api/v1/searchByName'
     axios.get(url,{
       params: {
@@ -159,6 +160,21 @@ class User extends PureComponent {
       all_data: this.state.old_data,
     })
     console.log(this.state.all_data)
+  }
+
+  sendIndividualRequest(id){
+    console.log('send request')
+    const url = '/api/v1/sendIndividualRequest'
+    axios.get(url,{
+      params: {
+        userId: store.get('user').id,
+        target: id,
+      },                                   
+    }).then((response) => {
+    }).catch(error => {
+      console.log('Get children list', error);
+    });
+
   }
 
   render() {
@@ -199,6 +215,7 @@ class User extends PureComponent {
             <Button
             type="primary"
                   onClick={() => {
+                    this.sendIndividualRequest(record.id)
                   }}
                 >
               Send
