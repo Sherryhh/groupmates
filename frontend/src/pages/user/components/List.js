@@ -15,13 +15,14 @@ class List extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      counts: 0,
-      id: [],
-      name: [],
-      email: [],
-      grade: [],
-      language: [],
-      skill: [],
+      // counts: 0,
+      // id: [],
+      // name: [],
+      // email: [],
+      // grade: [],
+      // language: [],
+      // skill: [],
+      all_data: [],
     }
     this.displayUserInfo()
   }
@@ -113,14 +114,29 @@ class List extends PureComponent {
           skills.push(s+", "+c)
         }
       }
+      // this.setState({
+      //   // counts: a.length,
+      //   id: ids,
+      //   name: names,
+      //   email: emails,
+      //   grade: grades,
+      //   language: languages,
+      //   skill: skills
+      // })
+      const all_data = []
+      for (let i = 0; i < a.length; i++) {
+        const newItem = {
+          "id": ids[i],
+          "name": names[i],
+          "email": emails[i],
+          "grade": grades[i],
+          "language": languages[i],
+          "skill": skills[i],
+        }
+        all_data.push(newItem)
+      }
       this.setState({
-        counts: a.length,
-        id: ids,
-        name: names,
-        email: emails,
-        grade: grades,
-        language: languages,
-        skill: skills
+        all_data: all_data,
       })
     }).catch(error => {
         console.log('Get children list', error);
@@ -129,18 +145,6 @@ class List extends PureComponent {
 
   render() {
     const { onInviteItem, onHideItem, ...tableProps } = this.props
-    const all_data = []
-    for (let i = 0; i < this.state.counts; i++) {
-      const newItem = {
-        "id": this.state.id[i],
-        "name": this.state.name[i],
-        "email": this.state.email[i],
-        "grade": this.state.grade[i],
-        "language": this.state.language[i],
-        "skill": this.state.skill[i],
-      }
-      all_data.push(newItem)
-    }
 
     const columns = [
       {
@@ -204,7 +208,7 @@ class List extends PureComponent {
         className={styles.table}
         bordered
         scroll={{ x: 1200 }}
-        dataSource={all_data}
+        dataSource={this.state.all_data}
         columns={columns}
         simple
         rowKey={record => record.id}

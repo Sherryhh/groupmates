@@ -167,6 +167,16 @@ def get_request():
         res = group.getAllGroupRequests()
     return jsonify(res), 200
 
+@app.route('/api/v1/searchByName', methods=['GET'])
+def searchByName():
+    userId  = request.args.get('userId')
+    target =  request.args.get('target')
+    cur = Student.query.filter_by(id=userId).first()
+    students = Student.query.filter(Student.name.contains(target))
+    res = cur.searchByName(students)
+    print(res)
+    return jsonify(res), 200
+
 @app.route('/api/v1/sortIndividuals', methods=['GET'])
 def sortIndividuals():
     userId  = request.args.get('userId')

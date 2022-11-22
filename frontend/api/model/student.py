@@ -109,7 +109,9 @@ class Student(db.Model):
         yearConvert = {"Freshman": 1, "Sophomore": 2, "Junior": 3, "Senior": 4}
         dictStudents = []
         for student in allStudents:
-            d = {"name":student.name, "email":student.email, "year":student.year, "major": student.major, "intro": student.intro,     \
+            if student.id == self.id:
+                continue
+            d = {"id": student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major, "intro": student.intro,     \
                 'first':student.first, 'second':student.second, 'third':student.third, \
                 'server':student.server, 'client':student.client, \
                 'frontendSkillScore':student.frontendSkillScore, 'backendSkillScore':student.backendSkillScore, 'total': 0}
@@ -127,6 +129,14 @@ class Student(db.Model):
             d['total'] = totalScore
             dictStudents.append(d)
         return sorted(dictStudents, key=lambda student: student['total'], reverse=True)
+
+    def searchByName(self, allStudents):
+        allStudent = []
+        for student in allStudents:
+            if student.open == 0 or student.id == self.id:
+                continue
+            allStudent.append(student)
+        return self.sortIndividuals(allStudent) 
 
 
 

@@ -87,7 +87,7 @@ class List extends PureComponent {
         key: 'skill',
       },
       {
-        title: 'Join Reques',
+        title: 'Join Request',
         render: (text, record) => {
           return (
             // <DropOption
