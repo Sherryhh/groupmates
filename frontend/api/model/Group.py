@@ -2,7 +2,6 @@ import sys
 sys.path.append("..")
 from index import db
 from model.student import Student
-
 class Group(db.Model):
 
     __tablename__ = "group"
@@ -16,8 +15,8 @@ class Group(db.Model):
     skill = db.Column(db.String(255))
     members = db.relationship('Student', backref='group', lazy=True)
     groupRequests = db.relationship('GroupRequest', backref = 'group', lazy = 'dynamic', foreign_keys = 'GroupRequest.receiver')
-
-    def __init__(self, open, name, leader, language, skill):
+    def __init__(self, id, open, name, leader, language, skill):
+        self.id = id 
         self.open = open
         self.name = name
         self.leader = leader
@@ -44,7 +43,7 @@ class Group(db.Model):
         res = []
         for r in self.groupRequests:
             # check whether the request is already inactive (already accepted or declined)
-            if r.status == 0:
+            if r.status != 1:
                 continue
             studentId = r.sender
             student = Student.query.filter_by(id=studentId).first()

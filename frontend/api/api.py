@@ -209,6 +209,29 @@ def sendGroupRequest():
     else:
         return {"msg":"Unable to send."}, 500
 
+@app.route('/api/v1/handleRequest', methods=['GET'])
+def handleRequest():
+    userId = request.args.get('userId')
+    target = request.args.get('target')
+    status = request.args.get('status')
+    student = Student.query.filter_by(id=userId).first()
+    if student.open == 1: # return individual requests
+        res = student.handleIndividualRequest(target, status)
+        if res != -1:
+            group = Group(id=res, open=1, name="default", leader=student.name, language="", skill="")
+            try:
+                db.session.add(group)
+                db.session.commit()
+                return {"msg":"Send successfully!"},200
+            except:
+                return {"msg":"Unable to send."}, 500
+        else:
+            return {"msg":"Unable to send."}, 500
+    else:
+        group = Group.query.filter_by(id=student.groupId).first()
+        res = group.handleGroupRequest(target, status)
+    return {"msg":"Send successfully!"},200
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

@@ -19,7 +19,28 @@ class Chart extends PureComponent {
     }
   }
 
+  handleRequest(id, status){
+    console.log('handle request info')
+    const url = '/api/v1/handleRequest';
+    axios.get(url,{
+      params: {
+        userId: this.state.userId,
+        target: id,
+        status: status,
+      },
+    }).then((response) => {
+      this.getRequestInfo()
+    }).catch(error => {
+        console.log('Get request info', error);
+    });
+  }
+
   handleMenuClick = (record, e) => {
+    if (e.key === '1') {
+      this.handleRequest(record.id, 0)
+    } else if (e.key === '2') {
+      this.handleRequest(record.id, -1)
+    }
   }
 
   getProgrammngLanguage(data){

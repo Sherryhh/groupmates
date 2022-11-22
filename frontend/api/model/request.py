@@ -11,11 +11,8 @@ class IndividualRequest(db.Model):
     sender = db.Column(db.Integer, db.ForeignKey('student.id'))
     receiver = db.Column(db.Integer, db.ForeignKey('student.id'))
     status = db.Column(db.Integer)
-    count = 2
 
     def __init__(self, sender, receiver, status):
-        self.count += 1
-        self.id = self.count
         self.sender = sender
         self.receiver = receiver
         self.status = status
@@ -29,11 +26,8 @@ class GroupRequest(db.Model):
     sender = db.Column(db.Integer, db.ForeignKey('student.id'))
     receiver = db.Column(db.Integer, db.ForeignKey('group.id'))
     status = db.Column(db.Integer)
-    count = 2
 
     def __init__(self, sender, receiver, status):
-        self.count += 1
-        self.id = self.count
         self.sender = sender
         self.receiver = receiver
         self.status = status

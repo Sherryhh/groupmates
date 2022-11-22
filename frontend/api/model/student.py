@@ -87,7 +87,7 @@ class Student(db.Model):
         res = []
         for r in self.individualRequests:
             # check whether the request is already inactive (already accepted or declined)
-            if r.status == 0:
+            if r.status != 1:
                 continue
             studentId = r.sender
             student = Student.query.filter_by(id=studentId).first()
@@ -116,6 +116,37 @@ class Student(db.Model):
             return True
         except:
             return False
+    
+    def handleIndividualRequest(self, targetStudentId, status):
+        for r in self.individualRequests:
+            # check whether the request is already inactive (already accepted or declined)
+            if r.status != 1:
+                continue
+            if int(targetStudentId) == r.sender:
+                student = Student.query.filter_by(id=targetStudentId).first()
+                # check whether the student has already joined a group
+                if student.open == 0:
+                    r.status = -1
+                    return -1
+                else:
+                    r.status = int(status)
+                    db.session.commit()
+                if r.status == 0:
+                    student.open = 0
+                    self.open = 0
+                    new_id = self.id + student.id
+                    student.groupId = new_id
+                    self.groupId = new_id
+                    db.session.commit()
+                    return new_id
+                    # group = Group(open=1, leader=student.name, language=res, skill="")
+                    # try:
+                    #     db.session.add(group)
+                    #     db.session.commit()
+                    #     return True
+                    # except:
+                    #     return False
+        return -1
 
     def sortIndividuals(self, allStudents):
         currLanuages = set([self.first, self.second, self.third])
