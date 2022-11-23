@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from index import app, db
-from model.group import Group
+from model.Group import Group
 from model.student import Student
 from model.request import IndividualRequest
 import sys
@@ -165,6 +165,7 @@ def get_request():
     else:
         group = Group.query.filter_by(id=student.groupId).first()
         res = group.getAllGroupRequests()
+        print(res)
     return jsonify(res), 200
 
 @app.route('/api/v1/searchByName', methods=['GET'])
@@ -212,21 +213,16 @@ def sendGroupRequest():
 @app.route('/api/v1/handleRequest', methods=['GET'])
 def handleRequest():
     userId = request.args.get('userId')
-    target = request.args.get('target')
+    requestId = request.args.get('requestId')
     status = request.args.get('status')
     student = Student.query.filter_by(id=userId).first()
     if student.open == 1: # return individual requests
-        res = student.handleIndividualRequest(target, status)
-        if res != -1:
-            group = Group(id=res, open=1, name="default", leader=student.name, language="", skill="")
-            try:
-                db.session.add(group)
-                db.session.commit()
-                return {"msg":"Send successfully!"},200
-            except:
-                return {"msg":"Unable to send."}, 500
+        r = IndividualRequest.query.filter_by(id=requestId).first()
+        success = r.handleIndividualRequest(status)
+        if success:
+            return {"msg":"Request processed successfully!"},200
         else:
-            return {"msg":"Unable to send."}, 500
+            return {"msg":"Fail to handle the request."}, 500
     else:
         group = Group.query.filter_by(id=student.groupId).first()
         res = group.handleGroupRequest(target, status)

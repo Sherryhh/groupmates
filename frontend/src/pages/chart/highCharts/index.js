@@ -25,7 +25,7 @@ class Chart extends PureComponent {
     axios.get(url,{
       params: {
         userId: this.state.userId,
-        target: id,
+        requestId: id,
         status: status,
       },
     }).then((response) => {
@@ -37,9 +37,9 @@ class Chart extends PureComponent {
 
   handleMenuClick = (record, e) => {
     if (e.key === '1') {
-      this.handleRequest(record.id, 0)
+      this.handleRequest(record.id, 1)
     } else if (e.key === '2') {
-      this.handleRequest(record.id, -1)
+      this.handleRequest(record.id, 2)
     }
   }
 
