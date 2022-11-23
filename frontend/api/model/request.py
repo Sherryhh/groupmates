@@ -40,11 +40,10 @@ class IndividualRequest(db.Model):
                 # set two new members' group id to the newly create group
                 self.sender.groupId = group.id
                 self.receiver.groupId = group.id
-                db.session.commit()
-                return True
             except:
                 return False
-        return False
+        db.session.commit()
+        return True
 
 class GroupRequest(db.Model):
 

@@ -115,6 +115,7 @@ class Chart extends PureComponent {
           "year": data[index].year,
           "languages": this.getProgrammngLanguage(data[index]),
           "skills": this.getSkills(data[index]),
+          "status":data[index].status,
         }
         requests.push(newItem)
       }
@@ -169,15 +170,34 @@ class Chart extends PureComponent {
         title: 'Action',
         key: 'operation',
         render: (text, record) => {
-          return (
-            <DropOption
-              onMenuClick={e => this.handleMenuClick(record, e)}
-              menuOptions={[
-                { key: '1', name: t`Accept` },
-                { key: '2', name: t`Reject` }
-              ]}
-            />
-          )
+          console.log(record)
+          if(record.status === 0) {
+            return (
+              <div>
+              <DropOption
+                onMenuClick={e => this.handleMenuClick(record, e)}
+                menuOptions={[
+                  { key: '1', name: t`Accept` },
+                  { key: '2', name: t`Reject` }
+                ]}
+              />
+            </div>
+            )
+          } else {
+            if(record.status === 1) {
+              return (
+              <div>
+                Accepted
+              </div>
+              )
+            } else {
+              return (
+              <div>
+                Declined
+              </div>
+              )
+            }
+          }
         },
       },
     ]

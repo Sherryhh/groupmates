@@ -87,13 +87,13 @@ class Student(db.Model):
         res = []
         for r in self.individualRequests:
             # check whether the request is already inactive (already accepted or declined)
-            if r.status != 0:
-                continue
+            # if r.status != 0:
+            #     continue
             student = r.sender
             # check whether the student has already joined a group
             if student.open == 0:
                 continue
-            res.append({"id": r.id, "studentId":student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
+            res.append({"id": r.id, "status":r.status, "studentId":student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
             'first':student.first, 'second':student.second, 'third':student.third, \
             'server':student.server, 'client':student.client})
         return res
