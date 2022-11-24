@@ -113,7 +113,7 @@ def get_all_user_info():
     for student in students:
         res.append({"id": student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
         'first':student.first, 'second':student.second, 'third':student.third, \
-        'server':student.server, 'client':student.client})
+        'server':student.server, 'client':student.client, 'groupId':student.groupId})
     return jsonify(res), 200
 
 @app.route('/api/v1/getGroupInfo', methods=['GET'])
