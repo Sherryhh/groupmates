@@ -99,16 +99,17 @@ class Student(db.Model):
         return sorted(res, key=lambda d: d['status'])
 
     def sendIndividualRequest(self, targetStudentId):
-        r = IndividualRequest(self.id, targetStudentId, 1)
+        r = IndividualRequest(self.id, targetStudentId, 0)
         try:
             db.session.add(r)
             db.session.commit()
             return True
-        except:
+        except Exception as e:
+            print(e)
             return False
 
     def sendGroupRequest(self, targetGroupId):
-        r = GroupRequest(self.id, targetGroupId, 1)
+        r = GroupRequest(self.id, targetGroupId, 0)
         try:
             db.session.add(r)
             db.session.commit()
