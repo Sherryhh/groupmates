@@ -185,21 +185,27 @@ class Post extends PureComponent {
               break
             }
           }
-          // this.getMemberInfo()
+          
+          let count = 0
           for (let i = 0; i < this.state.member_data.length; i++) {
             if (this.state.member_data[i].groupId == record.id) {
+              count++
               let tmp = "N/A"
+              let intro = "N/A"
+              if (this.state.member_data[i].intro != "") {
+                intro = this.state.member_data[i].intro
+              }
               if (this.state.member_data[i].name != ""){
-                tmp = "Name:" + this.state.member_data[i].name + "; " 
-                    + "Email:" + this.state.member_data[i].email + "; " 
-                    + "Major:" + this.state.member_data[i].major + "; "
-                    + "Grade:" + this.state.member_data[i].grade + "; "
-                    + "Language:" + this.state.member_data[i].language + "; "
-                    + "Skill:" + this.state.member_data[i].skill + "; "
-                    + "Intro:" + this.state.member_data[i].intro
+                tmp = "Member" + count + ": " + this.state.member_data[i].name + ";  " 
+                    + "Email: " + this.state.member_data[i].email + ";  " 
+                    + "Major: " + this.state.member_data[i].major + ";  "
+                    + "Grade: " + this.state.member_data[i].grade + ";  "
+                    // + "Language:" + this.state.member_data[i].language + "; "
+                    // + "Skill:" + this.state.member_data[i].skill + "; "
+                    + "Intro: " + intro
               }
               items.push(
-                {label: tmp, key: i}
+                {label: tmp, key: count + 1}
               )
             }
           }
