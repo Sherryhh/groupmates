@@ -265,7 +265,7 @@ class User extends PureComponent {
             <Col xl={{ span: 8 }} md={{ span: 1 }} style={{ marginBottom: 16, fontSize: 20 }}>
             Looking for Individuals
             </Col>
-            <Col xl={{ span: 9 }} md={{ span: 1 }}></Col>
+            <Col xl={{ span: 8 }} md={{ span: 1 }}></Col>
             <Col xl={{ span: 4 }} md={{ span: 1 }}>
               <Form.Item name="name">
               <Input
