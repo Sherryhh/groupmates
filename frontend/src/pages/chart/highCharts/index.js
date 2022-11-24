@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import { Page } from 'components'
-import { Table, Button, Row } from 'antd'
+import { Table, Button, Row, Dropdown, Menu } from 'antd'
 import styles from './index.less'
 import { t } from "@lingui/macro"
 import PropTypes from 'prop-types'
@@ -116,6 +116,7 @@ class Chart extends PureComponent {
           "languages": this.getProgrammngLanguage(data[index]),
           "skills": this.getSkills(data[index]),
           "status":data[index].status,
+          "intro":data[index].intro,
         }
         requests.push(newItem)
       }
@@ -139,7 +140,30 @@ class Chart extends PureComponent {
         title: 'Student Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text, record)=><Link to={`user/${record.id}`}>{text}</Link>,
+        // render: (text, record)=><Link to={`user/${record.id}`}>{text}</Link>,
+        render: (text, record) => {
+          const items = []
+          for (let i = 0; i < this.state.requests.length; i++) {
+            if (this.state.requests[i].id == record.id) {
+              let tmp = "N/A"
+              if (this.state.requests[i].intro != ""){
+                tmp = this.state.requests[i].intro
+              }
+              items.push(
+                {label: 'Self-introduction: '+ tmp, key: '1'}
+              )
+              break
+            }
+          }
+          console.log(items)
+          return (
+            <Dropdown menu={{items}} trigger={['click']}>
+            <a onClick={(e) => e.preventDefault()}>
+              {text}
+            </a>
+          </Dropdown>
+          )
+        },
       },
       {
         title: 'Email',

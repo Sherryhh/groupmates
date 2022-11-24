@@ -50,5 +50,5 @@ class Group(db.Model):
                 continue
             res.append({"id": r.id, "status":r.status, "studentId":student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
             'first':student.first, 'second':student.second, 'third':student.third, \
-            'server':student.server, 'client':student.client})
+            'server':student.server, 'client':student.client, 'intro':student.intro})
         return res
