@@ -163,26 +163,34 @@ class Chart extends PureComponent {
           <div className={styles.quote}>
           Group information
           <div className={styles.edit}>
-          {this.state.basicInfoediting ? (
-           <Button
-            type="primary"
-                  onClick={() => {
-                    this.setState({ basicInfoediting: false });
-                    this.editGroupInfo();
-                  }}
-                >
-                  submit
-                </Button>
-          ) : (
-            <Button
-            type="primary"
-                  onClick={() => {
-                    this.setState({ basicInfoediting: true });
-                  }}
-                >
-                  Edit
-                </Button>
+
+          {this.state.hasGroup ? (
+            this.state.basicInfoediting ? (
+             <Button
+              type="primary"
+                    onClick={() => {
+                      this.setState({ basicInfoediting: false });
+                      this.editGroupInfo();
+                    }}
+                  >
+                    submit
+                  </Button>
+            ) : (
+              <Button
+              type="primary"
+                    onClick={() => {
+                      this.setState({ basicInfoediting: true });
+                    }}
+                  >
+                    Edit
+                  </Button>
+            )
+          ):(
+            <div></div>
           )}
+
+
+
           </div>
           <Form
             className={styles.form}>
