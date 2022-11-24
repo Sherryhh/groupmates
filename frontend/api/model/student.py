@@ -96,7 +96,7 @@ class Student(db.Model):
             res.append({"id": r.id, "status":r.status, "studentId":student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
             'first':student.first, 'second':student.second, 'third':student.third, \
             'server':student.server, 'client':student.client})
-        return res
+        return sorted(res, key=lambda d: d['status'])
 
     def sendIndividualRequest(self, targetStudentId):
         r = IndividualRequest(self.id, targetStudentId, 1)

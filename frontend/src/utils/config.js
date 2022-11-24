@@ -1,7 +1,7 @@
 module.exports = {
-  siteName: 'Group Mates',
-  copyright: 'Ant Design Admin  ©2020 zuiidea',
-  logoPath: '/logo.svg',
+  siteName: 'Groupmates',
+  copyright: '',
+  logoPath: '/',
   apiPrefix: '/api/v1',
   fixedHeader: true, // sticky primary layout header
 
