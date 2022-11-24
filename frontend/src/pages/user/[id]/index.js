@@ -3,26 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'umi'
 import { Page } from 'components'
 import styles from './index.less'
+import { Row, Col, Button, Popconfirm, Form, Input, Table } from 'antd'
 
 @connect(({ userDetail }) => ({ userDetail }))
 class UserDetail extends PureComponent {
   render() {
-    const { userDetail } = this.props
-    const { data } = userDetail
-    const content = []
-    for (let key in data) {
-      if ({}.hasOwnProperty.call(data, key)) {
-        content.push(
-          <div key={key} className={styles.item}>
-            <div>{key}</div>
-            <div>{String(data[key])}</div>
-          </div>
-        )
-      }
-    }
     return (
       <Page inner>
-        <div className={styles.content}>{content}</div>
+        <Row>hiiii</Row>
       </Page>
     )
   }

@@ -234,7 +234,7 @@ module.exports = {
   [`PATCH ${ApiPrefix}/user/:id`](req, res) {
     const { id } = req.params
     const editItem = req.body
-    let isExist = false
+    let isExist = true
 
     database = database.map(item => {
       if (item.id === id) {

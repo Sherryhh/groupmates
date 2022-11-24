@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { history } from 'umi'
 import { connect } from 'umi'
-import { Row, Col, Button, Popconfirm, Form, Input, Table } from 'antd'
-import { Page } from 'components'
+import { Row, Col, Button, Popconfirm, Form, Input, Table, Dropdown, Menu } from 'antd'
+import { Page, DropOption } from 'components'
 import { stringify } from 'qs'
 import List from './components/List'
 import styles from './components/List.less'
@@ -108,9 +108,11 @@ class User extends PureComponent {
           "id": a[i].id,
           "name": a[i].name,
           "email": a[i].email,
+          "major": a[i].major,
           "grade": a[i].year,
           "language": this.getProgrammngLanguage(a[i]),
           "skill": this.getSkills(a[i]),
+          "intro": a[i].intro,
         }
         all_datas.push(newItem)
       }
@@ -140,9 +142,11 @@ class User extends PureComponent {
           "id": a[i].id,
           "name": a[i].name,
           "email": a[i].email,
+          "major": a[i].major,
           "grade": a[i].year,
           "language": this.getProgrammngLanguage(a[i]),
           "skill": this.getSkills(a[i]),
+          "intro": a[i].intro,
         }
         all_datas.push(newItem)
       }
@@ -184,12 +188,40 @@ class User extends PureComponent {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text, record)=><Link to={`user/${record.id}`}>{text}</Link>,
+        // render: (text, record)=><Link to={`user/${record.id}`}>{text}</Link>,
+        render: (text, record) => {
+          const items = []
+          for (let i = 0; i < this.state.all_data.length; i++) {
+            if (this.state.all_data[i].id == record.id) {
+              let tmp = "N/A"
+              if (this.state.all_data[i].intro != ""){
+                tmp = this.state.all_data[i].intro
+              }
+              items.push(
+                {label: 'Self-introduction: '+ tmp, key: '1'}
+              )
+              break
+            }
+          }
+          console.log(items)
+          return (
+            <Dropdown menu={{items}} trigger={['click']}>
+            <a onClick={(e) => e.preventDefault()}>
+              {text}
+            </a>
+          </Dropdown>
+          )
+        },
       },
       { 
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
+      },
+      {
+        title: 'Major',
+        dataIndex: 'major',
+        key: 'major',
       },
       {
         title: 'Grade',
