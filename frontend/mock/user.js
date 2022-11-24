@@ -46,7 +46,7 @@ const adminUsers = [
   },
   {
     id: 1,
-    username: 'guest',
+    username: 'XXX',
     password: 'guest',
     permissions: userPermission.DEFAULT,
   },
@@ -58,13 +58,19 @@ const adminUsers = [
   },
   {
     id: 3,
-    username: 'Dexter',
+    username: 'Emily',
     password: '123456',
     permissions: userPermission.DEFAULT,
   },
   {
-    id: 7,
+    id: 4,
     username: 'Sherry',
+    password: '123456',
+    permissions: userPermission.DEFAULT,
+  },
+  {
+    id: 8,
+    username: 'Emma',
     password: '123456',
     permissions: userPermission.DEFAULT,
   },
