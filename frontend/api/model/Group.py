@@ -46,7 +46,7 @@ class Group(db.Model):
             #     continue
             student = r.sender
             # check whether the student has already joined a group
-            if student.open == 0:
+            if student.open == 0 and student.groupId != r.receiverId:
                 continue
             res.append({"id": r.id, "status":r.status, "studentId":student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
             'first':student.first, 'second':student.second, 'third':student.third, \

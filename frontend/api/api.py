@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from index import app, db
 from model.Group import Group
 from model.student import Student
-from model.request import IndividualRequest
+from model.request import IndividualRequest, GroupRequest
 import sys
 
 # userInfo = {'name':'Emma', 'email':'emma@g.ucla.edu', 'year':'Freshman', 'major':'Computer Science', 'intro':'123', 'first':'Java', 'second':'Python', 'third':'C++'}
@@ -165,6 +165,7 @@ def get_request():
     else:
         group = Group.query.filter_by(id=student.groupId).first()
         res = group.getAllGroupRequests()
+        res = sorted(res, key=lambda d: d['status'])
     return jsonify(res), 200
 
 @app.route('/api/v1/searchByName', methods=['GET'])
@@ -174,7 +175,6 @@ def searchByName():
     cur = Student.query.filter_by(id=userId).first()
     students = Student.query.filter(Student.name.contains(target))
     res = cur.searchByName(students)
-    print(res)
     return jsonify(res), 200
 
 @app.route('/api/v1/sortIndividuals', methods=['GET'])
@@ -223,8 +223,12 @@ def handleRequest():
         else:
             return {"msg":"Fail to handle the request."}, 500
     else:
-        group = Group.query.filter_by(id=student.groupId).first()
-        res = group.handleGroupRequest(target, status)
+        r = GroupRequest.query.filter_by(id=requestId).first()
+        success = r.handleGroupRequest(status)
+        if success:
+            return {"msg":"Request processed successfully!"},200
+        else:
+            return {"msg":"Fail to handle the request."}, 500
     return {"msg":"Send successfully!"},200
 
 if __name__ == '__main__':

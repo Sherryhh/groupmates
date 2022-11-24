@@ -26,8 +26,7 @@ class IndividualRequest(db.Model):
         # check whether the sender of the request has already joined a group
         if self.sender.open == 0:
             return False
-        else:
-            self.status = int(status)
+        self.status = int(status)
         if self.status == 1: # accepted
             # set sender and receiver's open status to be false (they have formed a group)
             self.sender.open = 0
@@ -40,10 +39,12 @@ class IndividualRequest(db.Model):
                 # set two new members' group id to the newly create group
                 self.sender.groupId = group.id
                 self.receiver.groupId = group.id
-            except:
+            except Exception as e:
+                print(e)
                 return False
         db.session.commit()
         return True
+
 
 class GroupRequest(db.Model):
 
@@ -59,6 +60,18 @@ class GroupRequest(db.Model):
     receiver = relationship('Group', foreign_keys='GroupRequest.receiverId')
 
     def __init__(self, senderId, receiverId, status):
-        self.senderId = sender
-        self.receiverId = receiver
+        self.senderId = senderId
+        self.receiverId = receiverId
         self.status = status
+
+    def handleGroupRequest(self, status):
+        # check whether the sender of the request has already joined a group
+        if self.sender.open == 0:
+            return False
+        self.status = int(status)
+        if self.status == 1: # accepted
+            # set sender and receiver's open status to be false (they have formed a group)
+            self.sender.open = 0
+            self.sender.groupId = self.receiverId
+        db.session.commit()
+        return True
