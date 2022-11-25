@@ -225,7 +225,7 @@ class Post extends PureComponent {
         key: 'language',
       },
       {
-        title: 'Looking for...',
+        title: 'Desired Skills',
         dataIndex: 'skill',
         key: 'skill',
       },
