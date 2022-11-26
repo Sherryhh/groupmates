@@ -55,6 +55,11 @@ class Chart extends PureComponent {
             membersName.push(response['data']['members'][index].name)
             membersEmail.push(response['data']['members'][index].email)
           }
+          if (response['data']['open'] == '0') {
+            this.setState({
+              click: true
+            })
+          }
           this.setState({
               groupId: response['data']['groupId'],
               hasGroup: true,
@@ -162,6 +167,7 @@ class Chart extends PureComponent {
         },
       },
     ]
+    console.log(this.state.click)
     return (
       <Page
         // loading={loading.models.dashboard && sales.length === 0}
@@ -203,6 +209,7 @@ class Chart extends PureComponent {
           ):(
             <div></div>
           )}
+          
           {this.state.click ? (
             <Button
             onClick={() => {

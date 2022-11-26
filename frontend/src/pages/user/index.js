@@ -21,9 +21,11 @@ class User extends PureComponent {
       all_data: [],
       old_data: [],
       sent: [],
+      open: 1,
     }
     this.displayUserInfo()
     this.getAllSentRequest()
+    this.getGroupInfo()
   }
 
   handleRefresh = newQuery => { //reset
@@ -41,6 +43,25 @@ class User extends PureComponent {
       ),
     })
   }
+
+  getGroupInfo(){
+    console.log('get my group info')
+    const url = '/api/v1/getGroupInfo';
+    axios.get(url,{
+      params: {
+        userId: store.get('user').id,
+      },
+    }).then((response) => {
+      console.log(response)
+      if(response['data']['hasGroup'] == true){
+        this.setState({
+            open: response['data']['open'],
+        })
+      }
+    }).catch(error => {
+        console.log('Get my group info', error);
+    });
+};
 
   getProgrammngLanguage(data){
     let languages = []
@@ -268,17 +289,38 @@ class User extends PureComponent {
         fixed: 'right',
         render: (text, record) => {
           // console.log(this.state.sent.includes(record.id))
-          return (
-            <Button
-            disabled = {this.state.sent.includes(record.id)}
-            type="primary"
-                  onClick={() => {
-                    this.sendIndividualRequest(record.id)
-                  }}
-                >
-              Send
-            </Button>
-          )
+          if (this.state.open == 1){
+            return (
+              <Button
+              disabled = {this.state.sent.includes(record.id)}
+              type="primary"
+                    onClick={() => {
+                      this.sendIndividualRequest(record.id)
+                    }}
+                  >
+                Send
+              </Button>
+            )
+          } else {
+            return (
+              <Button
+              disabled
+              type="primary">
+                Send
+              </Button>
+            )
+          }
+          // return (
+          //   <Button
+          //   disabled = {this.state.sent.includes(record.id)}
+          //   type="primary"
+          //         onClick={() => {
+          //           this.sendIndividualRequest(record.id)
+          //         }}
+          //       >
+          //     Send
+          //   </Button>
+          // )
         },
       },
     ]

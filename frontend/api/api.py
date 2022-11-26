@@ -128,7 +128,7 @@ def get_group_info():
         members.append({"id": student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
         'first':student.first, 'second':student.second, 'third':student.third, \
         'server':student.server, 'client':student.client})
-    return {"groupId":group.id, "hasGroup":True,"name":group.name, "leader":group.leader, "language":group.language, "skill":group.skill,"members":members}
+    return {"groupId":group.id, "hasGroup":True,"name":group.name, "leader":group.leader, "language":group.language, "skill":group.skill,"members":members, "open":group.open}
 
 @app.route('/api/v1/editGroupInfo',methods=['GET'])
 def edit_group_info():
