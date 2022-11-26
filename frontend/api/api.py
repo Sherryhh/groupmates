@@ -165,7 +165,8 @@ def get_request():
     else:
         group = Group.query.filter_by(id=student.groupId).first()
         res = group.getAllGroupRequests()
-        res = sorted(res, key=lambda d: d['status'])
+    res = sorted(res, key=lambda d: d['status'])
+    print(res)
     return jsonify(res), 200
 
 @app.route('/api/v1/searchByName', methods=['GET'])

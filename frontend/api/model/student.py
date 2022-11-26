@@ -91,8 +91,8 @@ class Student(db.Model):
             #     continue
             student = r.sender
             # check whether the student has already joined a group
-            if student.open == 0:
-                continue
+            # if student.open == 0:
+            #     continue
             res.append({"id": r.id, "status":r.status, "studentId":student.id, "name":student.name, "email":student.email, "year":student.year, "major": student.major,
             'first':student.first, 'second':student.second, 'third':student.third, \
             'server':student.server, 'client':student.client, 'intro':student.intro})
@@ -103,6 +103,7 @@ class Student(db.Model):
         try:
             db.session.add(r)
             db.session.commit()
+            db.session.flush()
             return True
         except Exception as e:
             print(e)
@@ -113,6 +114,7 @@ class Student(db.Model):
         try:
             db.session.add(r)
             db.session.commit()
+            db.session.flush()
             return True
         except:
             return False

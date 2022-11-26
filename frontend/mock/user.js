@@ -46,8 +46,8 @@ const adminUsers = [
   },
   {
     id: 1,
-    username: 'XXX',
-    password: 'guest',
+    username: 'Anna',
+    password: '123456',
     permissions: userPermission.DEFAULT,
   },
   {

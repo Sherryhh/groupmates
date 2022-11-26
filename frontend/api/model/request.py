@@ -24,24 +24,27 @@ class IndividualRequest(db.Model):
 
     def handleIndividualRequest(self, status):
         # check whether the sender of the request has already joined a group
-        if self.sender.open == 0:
-            return False
+        # if self.sender.open == 0:
+        #     return False
         self.status = int(status)
         if self.status == 1: # accepted
             # set sender and receiver's open status to be false (they have formed a group)
-            self.sender.open = 0
             self.receiver.open = 0
             # create a new group
-            group = Group(open=1, leader=self.receiver.name, language="", skill="", name=self.receiver.name)
-            try:
-                db.session.add(group)
-                db.session.flush()
-                # set two new members' group id to the newly create group
-                self.sender.groupId = group.id
-                self.receiver.groupId = group.id
-            except Exception as e:
-                print(e)
-                return False
+            if self.sender.open == 0:
+                self.receiver.groupId = self.sender.groupId
+            else:
+                self.sender.open = 0
+                group = Group(open=1, leader=self.receiver.name, language="", skill="", name=self.receiver.name)
+                try:
+                    db.session.add(group)
+                    db.session.flush()
+                    # set two new members' group id to the newly create group
+                    self.sender.groupId = group.id
+                    self.receiver.groupId = group.id
+                except Exception as e:
+                    print(e)
+                    return False
         db.session.commit()
         return True
 
