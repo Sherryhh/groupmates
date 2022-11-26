@@ -241,6 +241,18 @@ def checkRequest():
     print(res)
     return jsonify(res), 200
 
+@app.route('/api/v1/changeGroupOpeness', methods=['GET'])
+def changeGroupOpen():
+    open = request.args.get('open')
+    groupId = request.args.get('groupId')
+    query = Group.query.filter_by(id=groupId)
+    group = query.first()
+    success = group.editGroupOpen(query, open)
+    if success:
+        return {"msg":"Edit successfully!"},200
+    else:
+        return {"msg":"Unable to update group status."}, 500
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

@@ -25,6 +25,7 @@ class Chart extends PureComponent {
       membersName:[],
       membersEmail:[],
       groupId: 0,
+      click: false,
     }
     this.getGroupInfo();
   }
@@ -87,7 +88,7 @@ class Chart extends PureComponent {
     }).catch(error => {
         console.log('Edit group information', error);
     });
-};
+  };
 
   componentDidMount() {
     this.getGroupInfo();
@@ -108,6 +109,21 @@ class Chart extends PureComponent {
         console.log('Edit group leader', error);
     });
   };
+
+  handleGroupChange(open) {
+    console.log("Change status")
+    const url = '/api/v1/changeGroupOpeness';
+    axios.get(url,{
+      params: {
+        open: open,
+        groupId: this.state.groupId,
+      },
+    }).then((response) => {
+      this.getGroupInfo()
+    }).catch(error => {
+        console.log('Change group open', error);
+    });
+  }
 
   render() {
     const members = []
@@ -163,7 +179,6 @@ class Chart extends PureComponent {
           <div className={styles.quote}>
           Group information
           <div className={styles.edit}>
-
           {this.state.hasGroup ? (
             this.state.basicInfoediting ? (
              <Button
@@ -174,7 +189,7 @@ class Chart extends PureComponent {
                     }}
                   >
                     submit
-                  </Button>
+              </Button>
             ) : (
               <Button
               type="primary"
@@ -188,9 +203,25 @@ class Chart extends PureComponent {
           ):(
             <div></div>
           )}
-
-
-
+          {this.state.click ? (
+            <Button
+            onClick={() => {
+              this.setState({ click: false });
+              this.handleGroupChange(1)
+            }}
+            >
+              Open
+            </Button>
+          ):(
+            <Button
+            onClick={() => {
+              this.setState({ click: true });
+              this.handleGroupChange(0)
+              }}
+            >
+              Close
+            </Button>
+          )}
           </div>
           <Form
             className={styles.form}>

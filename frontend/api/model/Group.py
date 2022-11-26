@@ -37,6 +37,14 @@ class Group(db.Model):
             return True
         except:
             return False
+    
+    def editGroupOpen(self, query, open):
+        query.update({'open':open})
+        try:
+            db.session.commit()
+            return True
+        except:
+            return False
 
     def getAllGroupRequests(self):
         res = []
