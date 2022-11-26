@@ -32,13 +32,11 @@ class Post extends PureComponent {
         userId: store.get('user').id,
       },                                   
     }).then((response) => {
-      let hasGroup = false
       if (response.data.open == '0') {
-        hasGroup = true
+        this.setState({
+          hasGroup: true,
+        })
       }
-      this.setState({
-        hasGroup: true,
-      })
     }).catch(error => {
         console.log('Get children list', error);
     });

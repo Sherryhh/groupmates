@@ -20,9 +20,10 @@ class User extends PureComponent {
       search: false,
       all_data: [],
       old_data: [],
-      disabled: [],
+      sent: [],
     }
     this.displayUserInfo()
+    this.getAllSentRequest()
   }
 
   handleRefresh = newQuery => { //reset
@@ -175,10 +176,33 @@ class User extends PureComponent {
         target: id,
       },                                   
     }).then((response) => {
+      this.getAllSentRequest()
     }).catch(error => {
       console.log('Get children list', error);
     });
+    // this.getAllSentRequest()
+  }
 
+  getAllSentRequest(){
+    console.log('all request')
+    const url = '/api/v1/checkRequest'
+    let all = []
+    axios.get(url,{
+      params: {
+        sender: store.get('user').id,
+      },                                   
+    }).then((response) => {
+      // console.log(response.data)
+      for (let i = 0; i < response.data.length; i++){
+        all.push(response.data[i].receiver)
+      }
+      // all.push(response.data.receiver)
+      this.setState({
+        sent: all,
+      })
+    }).catch(error => {
+      console.log('Get children list', error);
+    });
   }
 
   render() {
@@ -243,8 +267,10 @@ class User extends PureComponent {
         key: 'operation',
         fixed: 'right',
         render: (text, record) => {
+          // console.log(this.state.sent.includes(record.id))
           return (
             <Button
+            disabled = {this.state.sent.includes(record.id)}
             type="primary"
                   onClick={() => {
                     this.sendIndividualRequest(record.id)
