@@ -9,7 +9,7 @@ class Student(db.Model):
     __tablename__ = "student"
     __table_args__ = {'extend_existing': True}
 
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(255))
     email = db.Column(db.String(255))
     year = db.Column(db.String(45))
@@ -45,7 +45,7 @@ class Student(db.Model):
         return {"name":self.name, "email":self.email, "year":self.year, "major": self.major, "intro": self.intro,     \
         'first':self.first, 'second':self.second, 'third':self.third, \
         'server':self.server, 'client':self.client, \
-        'frontendSkillScore':self.frontendSkillScore, 'backendSkillScore':self.backendSkillScore}
+        'frontendSkillScore':self.frontendSkillScore, 'backendSkillScore':self.backendSkillScore, 'open': self.open}
 
     def editUserInfo(self, query, name, email, year, major, intro):
         query.update({'name':name, 'email':email,'year':year,'major':major, 'intro':intro})

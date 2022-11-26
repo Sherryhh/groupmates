@@ -9,7 +9,7 @@ class IndividualRequest(db.Model):
     __tablename__ = "individualRequest"
     __table_args__ = {'extend_existing': True}
 
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key = True)
     senderId = db.Column(db.Integer, db.ForeignKey('student.id'))
     receiverId = db.Column(db.Integer, db.ForeignKey('student.id'))
     status = db.Column(db.Integer)

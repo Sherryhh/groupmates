@@ -18,8 +18,30 @@ class Post extends PureComponent {
     this.state = {
       all_data: [],
       member_data: [],
+      hasGroup: false,
     }
     this.displayGroupInfo()
+    this.checkUserStatus()
+  }
+
+  checkUserStatus(){
+    console.log('get current user info')
+    const url = '/api/v1/getUserInfo';
+    axios.get(url,{
+      params: {
+        userId: store.get('user').id,
+      },                                   
+    }).then((response) => {
+      let hasGroup = false
+      if (response.data.open == '0') {
+        hasGroup = true
+      }
+      this.setState({
+        hasGroup: true,
+      })
+    }).catch(error => {
+        console.log('Get children list', error);
+    });
   }
 
   displayGroupInfo(){
@@ -232,16 +254,25 @@ class Post extends PureComponent {
       {
         title: 'Join Request',
         render: (text, record) => {
-          return (
-            <Button
-            type="primary"
-                  onClick={() => {
-                    this.sendGroupRequest(record.id)
-                  }}
-                >
-              Send
-            </Button>
-          )
+          if (this.state.hasGroup) {
+            console.log()
+            return (
+              <Button type="primary" disabled>
+                Send
+              </Button>
+            )
+          } else {
+            return (
+              <Button
+              type="primary"
+                    onClick={() => {
+                      this.sendGroupRequest(record.id)
+                    }}
+                  >
+                Send
+              </Button>
+            )
+          }
         },
       },
     ]

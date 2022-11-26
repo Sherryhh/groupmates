@@ -7,7 +7,7 @@ class Group(db.Model):
     __tablename__ = "group"
     __table_args__ = {'extend_existing': True}
 
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key = True)
     open = db.Column(db.Integer)
     name = db.Column(db.String(255))
     leader = db.Column(db.String(255))

@@ -229,7 +229,17 @@ def handleRequest():
             return {"msg":"Request processed successfully!"},200
         else:
             return {"msg":"Fail to handle the request."}, 500
-    return {"msg":"Send successfully!"},200
+
+@app.route('/api/v1/checkRequest', methods=['GET'])
+def checkRequest():
+    senderId = request.args.get('sender')
+    receiverId = request.args.get('receiver')
+    exist = IndividualRequest.query.filter_by(senderId=senderId, receiverId=receiverId).first()
+    print(exist)
+    if exist:
+        return {"id": senderId, "status": True}, 200
+    else:
+        return {"id": senderId, "status": False}, 200
 
 if __name__ == '__main__':
     with app.app_context():
