@@ -42,7 +42,7 @@ npm run start
 In a different tab (please change password accordingly in the `frontend/api/index.js`)
 ```bash
 cd api
-python3 -m flask run
+python3 run.py
 ```
 
 5. For login page, please refer to `frontend/mock/user.js` for now for current registered users (will be update in the future)
