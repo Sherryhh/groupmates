@@ -12,7 +12,7 @@ export default {
   removeUser: 'DELETE /user/:id',
   removeUserList: 'POST /users/delete',
 
-  queryPostList: '/posts',
+  queryPostList: '/groups',
 
   queryDashboard: '/dashboard',
 }

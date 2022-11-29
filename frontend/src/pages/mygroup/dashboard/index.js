@@ -209,8 +209,8 @@ class Chart extends PureComponent {
           ):(
             <div></div>
           )}
-          
-          {this.state.click ? (
+          {this.state.hasGroup ? (
+            this.state.click ? (
             <Button
             onClick={() => {
               this.setState({ click: false });
@@ -228,6 +228,9 @@ class Chart extends PureComponent {
             >
               Close
             </Button>
+          )
+          ):(
+            <div></div>
           )}
           </div>
           <Form

@@ -20,7 +20,7 @@ const database = [
     breadcrumbParentId: '1',
     name: 'Groups',
     icon: 'team',
-    route: '/post',
+    route: '/group',
   },
   {
     id: '5',
@@ -34,7 +34,7 @@ const database = [
     menuParentId: '5',
     name: 'Group Dashboard',
     icon: 'api',
-    route: '/chart/ECharts',
+    route: '/mygroup/dashboard',
   },
   {
     id: '52',
@@ -42,7 +42,7 @@ const database = [
     menuParentId: '5',
     name: 'Request',
     icon: 'api',
-    route: '/chart/highCharts',
+    route: '/mygroup/request',
   },
 ]
 
