@@ -29,20 +29,15 @@ class Header extends PureComponent {
 
     const rightContent = [
       <Menu key="user" mode="horizontal" onClick={this.handleClickMenu}>
-        <SubMenu
-          title={
-            <Fragment>
-              <span style={{ color: '#999', marginRight: 4 }}>
-                <Trans>Hi,</Trans>
-              </span>
-              <span>{username}</span>
-            </Fragment>
-          }
-        >
-          <Menu.Item key="SignOut">
-            <Trans>Sign out</Trans>
-          </Menu.Item>
-        </SubMenu>
+        <Fragment>
+          <span style={{ color: '#999', marginRight: 4 }}>
+            Hi,
+          </span>
+          <span>{username}</span>
+        </Fragment>
+        <Menu.Item key="SignOut">
+          Sign out
+        </Menu.Item>
       </Menu>,
     ]
 
