@@ -2,13 +2,14 @@ import { Mock, Constant, randomAvatar } from './_utils'
 import qs from 'qs'
 import Papa from "papaparse";
 var fs = require('fs');
+const path = require("path");
 const { ApiPrefix } = Constant
 
 // import csvFile from '/Users/sherryhuang/Documents/CS130/groupmates/data/student.csv'
 // const csvFile = fs.createReadStream('../../data/student.csv')
 // var filepath = '/Users/sherryhuang/Documents/CS130/groupmates/data/student.csv'
-var filepath = '/Users/sherryhuang/Documents/CS130/groupmates/frontend/api/out.csv'
-
+// var filepath = '/Users/sherryhuang/Documents/CS130/groupmates/frontend/api/out.csv'
+var filepath = path.resolve(__dirname, "../api/out.csv")
 let usersListData = Mock.mock({
   'data|10': [
     // {
