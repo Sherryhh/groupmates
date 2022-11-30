@@ -1,7 +1,13 @@
 import { Mock, Constant, randomAvatar } from './_utils'
 import qs from 'qs'
-
+import Papa from "papaparse";
+var fs = require('fs');
 const { ApiPrefix } = Constant
+
+// import csvFile from '/Users/sherryhuang/Documents/CS130/groupmates/data/student.csv'
+// const csvFile = fs.createReadStream('../../data/student.csv')
+// var filepath = '/Users/sherryhuang/Documents/CS130/groupmates/data/student.csv'
+var filepath = '/Users/sherryhuang/Documents/CS130/groupmates/frontend/api/out.csv'
 
 let usersListData = Mock.mock({
   'data|10': [
@@ -44,36 +50,36 @@ const adminUsers = [
     password: 'admin',
     permissions: userPermission.DEFAULT,
   },
-  {
-    id: 1,
-    username: 'Anna',
-    password: '123456',
-    permissions: userPermission.DEFAULT,
-  },
-  {
-    id: 2,
-    username: '吴彦祖',
-    password: '123456',
-    permissions: userPermission.DEFAULT,
-  },
-  {
-    id: 3,
-    username: 'Emily',
-    password: '123456',
-    permissions: userPermission.DEFAULT,
-  },
-  {
-    id: 4,
-    username: 'Sherry',
-    password: '123456',
-    permissions: userPermission.DEFAULT,
-  },
-  {
-    id: 8,
-    username: 'Emma',
-    password: '123456',
-    permissions: userPermission.DEFAULT,
-  },
+  // {
+  //   id: 1,
+  //   username: 'Anna',
+  //   password: '123456',
+  //   permissions: userPermission.DEFAULT,
+  // },
+  // {
+  //   id: 2,
+  //   username: '吴彦祖',
+  //   password: '123456',
+  //   permissions: userPermission.DEFAULT,
+  // },
+  // {
+  //   id: 3,
+  //   username: 'Emily',
+  //   password: '123456',
+  //   permissions: userPermission.DEFAULT,
+  // },
+  // {
+  //   id: 4,
+  //   username: 'Sherry',
+  //   password: '123456',
+  //   permissions: userPermission.DEFAULT,
+  // },
+  // {
+  //   id: 8,
+  //   username: 'Emma',
+  //   password: '123456',
+  //   permissions: userPermission.DEFAULT,
+  // },
 ]
 
 const queryArray = (array, key, keyAlias = 'key') => {
@@ -103,23 +109,41 @@ const NOTFOUND = {
 module.exports = {
   [`POST ${ApiPrefix}/user/login`](req, res) {
     const { username, password } = req.body
-    const user = adminUsers.filter(item => item.username === username)
-
-    if (user.length > 0 && user[0].password === password) {
-      const now = new Date()
-      now.setDate(now.getDate() + 1)
-      res.cookie(
-        'token',
-        JSON.stringify({ id: user[0].id, deadline: now.getTime() }),
-        {
-          maxAge: 900000,
-          httpOnly: true,
+    fs.readFile(filepath, 'utf8', function (err, data) {
+      if (err) {
+          throw err;
+      }
+      Papa.parse(data, {
+       step: function (row) {
+        adminUsers.push({
+          id: row.data[0],
+          username: row.data[1],
+          password: row.data[2],
+          permissions: userPermission.DEFAULT,
+        })
+       },
+       complete: () => {
+        // console.log(adminUsers);
+        const user = adminUsers.filter(item => item.username === username)
+        console.log(user);
+        if (user.length > 0 && user[0].password === password) {
+          const now = new Date()
+          now.setDate(now.getDate() + 1)
+          res.cookie(
+            'token',
+            JSON.stringify({ id: user[0].id, deadline: now.getTime() }),
+            {
+              maxAge: 900000,
+              httpOnly: true,
+            }
+          )
+          res.json({ success: true, message: 'Ok' })
+        } else {
+          res.status(400).end()
         }
-      )
-      res.json({ success: true, message: 'Ok' })
-    } else {
-      res.status(400).end()
-    }
+       }
+     });
+    });
   },
 
   [`GET ${ApiPrefix}/user/logout`](req, res) {
