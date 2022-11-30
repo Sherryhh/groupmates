@@ -43,43 +43,13 @@ const userPermission = {
   },
 }
 
-const adminUsers = [
+var adminUsers = [
   {
     id: 0,
     username: 'admin',
     password: 'admin',
     permissions: userPermission.DEFAULT,
   },
-  // {
-  //   id: 1,
-  //   username: 'Anna',
-  //   password: '123456',
-  //   permissions: userPermission.DEFAULT,
-  // },
-  // {
-  //   id: 2,
-  //   username: '吴彦祖',
-  //   password: '123456',
-  //   permissions: userPermission.DEFAULT,
-  // },
-  // {
-  //   id: 3,
-  //   username: 'Emily',
-  //   password: '123456',
-  //   permissions: userPermission.DEFAULT,
-  // },
-  // {
-  //   id: 4,
-  //   username: 'Sherry',
-  //   password: '123456',
-  //   permissions: userPermission.DEFAULT,
-  // },
-  // {
-  //   id: 8,
-  //   username: 'Emma',
-  //   password: '123456',
-  //   permissions: userPermission.DEFAULT,
-  // },
 ]
 
 const queryArray = (array, key, keyAlias = 'key') => {
@@ -109,6 +79,12 @@ const NOTFOUND = {
 module.exports = {
   [`POST ${ApiPrefix}/user/login`](req, res) {
     const { username, password } = req.body
+    adminUsers = [ {
+      id: 0,
+      username: 'admin',
+      password: 'admin',
+      permissions: userPermission.DEFAULT,
+    },]
     fs.readFile(filepath, 'utf8', function (err, data) {
       if (err) {
           throw err;
