@@ -67,7 +67,7 @@ class Signup extends PureComponent {
                 />
             </FormItem>
             <FormItem name="password" rules={[{ required: true }]} hasFeedback>
-            <Input type='password' value={this.state.password} required 
+            <Input  placeholder={`Password`} type='password' value={this.state.password} required 
             onChange={(e)=>{
                   this.setState({password: e.target.value});
                 }}/>
