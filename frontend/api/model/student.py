@@ -25,8 +25,9 @@ class Student(db.Model):
     open = db.Column(db.Integer)
     groupId = db.Column(db.Integer, db.ForeignKey('group.id'))
     individualRequests = db.relationship('IndividualRequest', backref = 'student', lazy = 'dynamic', foreign_keys = 'IndividualRequest.receiverId')
+    password = db.Column(db.String(255))
 
-    def __init__(self, name, email, year, major, intro, first, second, third, server, client, frontendSkillScore, backendSkillScore, open):
+    def __init__(self, name, email, year, major, intro, first, second, third, server, client, frontendSkillScore, backendSkillScore, open, password):
         self.name = name
         self.email = email
         self.year = year
@@ -40,6 +41,17 @@ class Student(db.Model):
         self.frontendSkillScore = frontendSkillScore
         self.backendSkillScore = backendSkillScore
         self.open = open
+        self.password = password
+    
+    def createUser(self):
+        try:
+            db.session.add(self)
+            db.session.commit()
+            db.session.flush()
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     def getUserInfo(self):
         return {"name":self.name, "email":self.email, "year":self.year, "major": self.major, "intro": self.intro,     \

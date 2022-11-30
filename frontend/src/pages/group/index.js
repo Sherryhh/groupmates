@@ -166,22 +166,6 @@ class Post extends PureComponent {
     }
   }
 
-  // get listProps() {
-  //   const { post, loading, location } = this.props
-  //   const { list, pagination } = post
-  //   const { query, pathname } = location
-
-  //   return {
-  //     pagination,
-  //     dataSource: list,
-  //     loading: loading.effects['post/query'],
-  //     onJoinItem(page) {
-  //     },
-  //     onHideItem(page) {
-  //     },
-  //   }
-  // }
-
   render() {
     const { ...tableProps } = this.props
     const columns = [

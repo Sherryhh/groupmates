@@ -8,16 +8,39 @@ import { t, Trans } from "@lingui/macro"
 import { setLocale } from 'utils'
 import config from 'utils/config'
 import { history } from 'umi'
-
+import axios from 'axios';
 import styles from './index.less'
 
 const FormItem = Form.Item
 
 @connect(({ loading, dispatch }) => ({ loading, dispatch }))
 class Signup extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      password: "",
+    }
+  }
+
+  addUser() {
+    console.log('add current user')
+    const url = '/api/v1/addUser';
+    axios.get(url,{
+      params: {
+        name: this.state.name,
+        password: this.state.password
+      },                                   
+    }).then((response) => {
+      console.log(response)
+    }).catch(error => {
+        console.log('Get children list', error);
+    });
+    history.push('/login')
+  }
 
   render() {
-    const { dispatch,   loading } = this.props
+    const { dispatch, loading } = this.props
 
     const handleOk = values => {
       dispatch({ type: 'login/login', payload: values })
@@ -36,20 +59,25 @@ class Signup extends PureComponent {
             <FormItem name="username"
               rules={[{ required: true }]} hasFeedback>
                 <Input
-                  placeholder={t`Username`}
+                  placeholder={`Username`}
+                  value={this.state.name}
+                  onChange={(e)=>{
+                    this.setState({name: e.target.value});
+                  }}
                 />
             </FormItem>
-            <Trans id="Password" render={({translation}) => (
-              <FormItem name="password" rules={[{ required: true }]} hasFeedback>
-              <Input type='password' placeholder={translation} required />
-              </FormItem>)}
-            />
+            <FormItem name="password" rules={[{ required: true }]} hasFeedback>
+            <Input type='password' value={this.state.password} required 
+            onChange={(e)=>{
+                  this.setState({password: e.target.value});
+                }}/>
+            </FormItem>
             <Row>
             <Button
               type="primary"
-              onClick={() => history.push('/login')}
+              onClick={() => this.addUser()}
             >
-              <Trans>Sign up</Trans>
+              Sign up
             </Button>
             </Row>
           </Form>

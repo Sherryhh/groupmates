@@ -7,6 +7,17 @@ from model.request import IndividualRequest, GroupRequest
 import sys
 
 # userInfo = {'name':'Emma', 'email':'emma@g.ucla.edu', 'year':'Freshman', 'major':'Computer Science', 'intro':'123', 'first':'Java', 'second':'Python', 'third':'C++'}
+@app.route('/api/v1/addUser', methods=['GET', 'POST'])
+def add_user():
+    name = request.args.get('name')
+    password = request.args.get('password')
+    print(name)
+    print(password)
+    student = Student(name=name, email="your@email.com", year="Freshman", major="Computer Science", intro="", first="", second="",third="", server="[]",client="[]", frontendSkillScore=3, backendSkillScore=3, open=1, password=password)
+    if student.createUser():
+        return {"msg":"add successfully!"},200
+    else:
+        return {"msg":"Unable to add user"}, 500
 
 @app.route('/api/v1/getUserInfo', methods=['GET'])
 def get_user_info():
