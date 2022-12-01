@@ -45,8 +45,10 @@ cd api
 python3 run.py
 ```
 
-5. For login page, please refer to `frontend/mock/user.js` for now for current registered users (will be update in the future)
-
+4. Open the website
+```
+http://localhost:7001
+```
 
 ## Citation
 The frontend of this project is adapt from [antd-admin](https://github.com/zuiidea/antd-admin) and rely on ant design.
