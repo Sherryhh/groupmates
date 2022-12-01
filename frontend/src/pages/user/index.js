@@ -1,14 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { history } from 'umi'
-import { connect } from 'umi'
 import { Row, Col, Button, Popconfirm, Form, Input, Table, Dropdown, Menu } from 'antd'
 import { Page, DropOption } from 'components'
 import { stringify } from 'qs'
 import styles from './List.less'
 import axios from 'axios'
 import store from 'store'
-import { Link } from 'umi'
 
 // @connect(({ user, loading }) => ({ user, loading }))
 class User extends PureComponent {
@@ -326,7 +324,6 @@ class User extends PureComponent {
 
     return (
       <Page inner>
-        {/* <Filter {...this.filterProps} /> */}
         {(
           <Row gutter={24}>
             <Col xl={{ span: 8 }} md={{ span: 1 }} style={{ marginBottom: 16, fontSize: 20 }}>

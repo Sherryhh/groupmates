@@ -5,8 +5,6 @@ import styles from './index.less'
 const FormItem = Form.Item;
 import store from 'store'
 import axios from 'axios';
-import { t } from "@lingui/macro"
-import PropTypes from 'prop-types'
 import { DropOption } from 'components'
 
 class Chart extends PureComponent {
@@ -160,7 +158,7 @@ class Chart extends PureComponent {
             <DropOption
               onMenuClick={e => this.handleMenuClick(record, e)}
               menuOptions={[
-                { key: '1', name: t`Select as Leader` }
+                { key: '1', name: `Select as Leader` }
               ]}
             />
           )
@@ -170,7 +168,6 @@ class Chart extends PureComponent {
     console.log(this.state.click)
     return (
       <Page
-        // loading={loading.models.dashboard && sales.length === 0}
         className={styles.dashboard}
       >
         <Row gutter={24}>
@@ -299,7 +296,7 @@ class Chart extends PureComponent {
             {...tableProps}
             pagination={{
               ...tableProps.pagination,
-              showTotal: total => t`Total ${total} Items`,
+              showTotal: total => `Total ${total} Items`,
             }}
             bordered
             scroll={{ x: 1200 }}

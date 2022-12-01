@@ -12,14 +12,6 @@ const { ApiPrefix } = Constant
 var filepath = path.resolve(__dirname, "../api/out.csv")
 let usersListData = Mock.mock({
   'data|10': [
-    // {
-    //   id: '@id',
-    //   name: '@name',
-    //   grade: '123',
-    //   language: '456',
-    //   email: '@email',
-    //   frameworks: '789',
-    // },
   ],
 })
 

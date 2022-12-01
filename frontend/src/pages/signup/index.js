@@ -2,10 +2,6 @@ import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'umi'
 import { Button, Row, Input, Form } from 'antd'
-import { GlobalFooter } from 'components'
-import { GithubOutlined } from '@ant-design/icons'
-import { t, Trans } from "@lingui/macro"
-import { setLocale } from 'utils'
 import config from 'utils/config'
 import { history } from 'umi'
 import axios from 'axios';

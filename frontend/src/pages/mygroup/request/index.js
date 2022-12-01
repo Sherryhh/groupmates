@@ -2,10 +2,7 @@ import React, {PureComponent} from 'react'
 import { Page } from 'components'
 import { Table, Button, Row, Dropdown, Menu } from 'antd'
 import styles from './index.less'
-import { t } from "@lingui/macro"
-import PropTypes from 'prop-types'
 import { DropOption } from 'components'
-import { Link } from 'umi'
 import store from 'store'
 import axios from 'axios';
 
@@ -201,8 +198,8 @@ class Chart extends PureComponent {
               <DropOption
                 onMenuClick={e => this.handleMenuClick(record, e)}
                 menuOptions={[
-                  { key: '1', name: t`Accept` },
-                  { key: '2', name: t`Reject` }
+                  { key: '1', name: `Accept` },
+                  { key: '2', name: `Reject` }
                 ]}
               />
             </div>
@@ -231,7 +228,7 @@ class Chart extends PureComponent {
         {...tableProps}
         pagination={{
           ...tableProps.pagination,
-          showTotal: total => t`Total ${total} Items`,
+          showTotal: total => `Total ${total} Items`,
         }}
         bordered
         scroll={{ x: 1200 }}
