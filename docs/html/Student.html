@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student module &mdash; Groupmates 2.6 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User module" href="User.html" />
+    <link rel="prev" title="Request module" href="Request.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Groupmates
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Group.html">Group module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Request.html">Request module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Student module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Student.Student"><code class="docutils literal notranslate"><span class="pre">Student</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.id"><code class="docutils literal notranslate"><span class="pre">Student.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.groupId"><code class="docutils literal notranslate"><span class="pre">Student.groupId</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.individualRequests"><code class="docutils literal notranslate"><span class="pre">Student.individualRequests</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.name"><code class="docutils literal notranslate"><span class="pre">Student.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.email"><code class="docutils literal notranslate"><span class="pre">Student.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.year"><code class="docutils literal notranslate"><span class="pre">Student.year</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.major"><code class="docutils literal notranslate"><span class="pre">Student.major</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.intro"><code class="docutils literal notranslate"><span class="pre">Student.intro</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.first"><code class="docutils literal notranslate"><span class="pre">Student.first</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.second"><code class="docutils literal notranslate"><span class="pre">Student.second</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.third"><code class="docutils literal notranslate"><span class="pre">Student.third</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.server"><code class="docutils literal notranslate"><span class="pre">Student.server</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.client"><code class="docutils literal notranslate"><span class="pre">Student.client</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.frontendSkillScore"><code class="docutils literal notranslate"><span class="pre">Student.frontendSkillScore</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.backendSkillScore"><code class="docutils literal notranslate"><span class="pre">Student.backendSkillScore</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.open"><code class="docutils literal notranslate"><span class="pre">Student.open</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.password"><code class="docutils literal notranslate"><span class="pre">Student.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.createUser"><code class="docutils literal notranslate"><span class="pre">Student.createUser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.getUserInfo"><code class="docutils literal notranslate"><span class="pre">Student.getUserInfo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.editUserInfo"><code class="docutils literal notranslate"><span class="pre">Student.editUserInfo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.editProgrammingLanguage"><code class="docutils literal notranslate"><span class="pre">Student.editProgrammingLanguage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.editUserRating"><code class="docutils literal notranslate"><span class="pre">Student.editUserRating()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.editFrameworks"><code class="docutils literal notranslate"><span class="pre">Student.editFrameworks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.getAllStudentsInfo"><code class="docutils literal notranslate"><span class="pre">Student.getAllStudentsInfo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.getAllIndividualRequests"><code class="docutils literal notranslate"><span class="pre">Student.getAllIndividualRequests()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.sendIndividualRequest"><code class="docutils literal notranslate"><span class="pre">Student.sendIndividualRequest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.sendGroupRequest"><code class="docutils literal notranslate"><span class="pre">Student.sendGroupRequest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.sortIndividuals"><code class="docutils literal notranslate"><span class="pre">Student.sortIndividuals()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Student.Student.searchByName"><code class="docutils literal notranslate"><span class="pre">Student.searchByName()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="User.html">User module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Groupmates</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Model</a></li>
+      <li class="breadcrumb-item active">Student module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Student.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Student">
+<span id="student-module"></span><h1>Student module<a class="headerlink" href="#module-Student" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Student.Student">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Student.</span></span><span class="sig-name descname"><span class="pre">Student</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">major</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">third</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frontendSkillScore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backendSkillScore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">Integer(),</span> <span class="pre">table=None,</span> <span class="pre">primary_key=True,</span> <span class="pre">nullable=False)</span></em><a class="headerlink" href="#Student.Student.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the id that is unique to this user, primary key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.groupId">
+<span class="sig-name descname"><span class="pre">groupId</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">Integer(),</span> <span class="pre">ForeignKey('group.id'),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.groupId" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicating the id of which group this user belongs to</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.individualRequests">
+<span class="sig-name descname"><span class="pre">individualRequests</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;RelationshipProperty</span> <span class="pre">at</span> <span class="pre">0x15dda5d9b40;</span> <span class="pre">no</span> <span class="pre">key&gt;</span></em><a class="headerlink" href="#Student.Student.individualRequests" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list recording all the individual requests the user received</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(list(Request))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=255),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.email">
+<span class="sig-name descname"><span class="pre">email</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=255),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.email" title="Permalink to this definition">¶</a></dt>
+<dd><p>email address of the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.year">
+<span class="sig-name descname"><span class="pre">year</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=45),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.year" title="Permalink to this definition">¶</a></dt>
+<dd><p>the current year that the user is in</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.major">
+<span class="sig-name descname"><span class="pre">major</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=255),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.major" title="Permalink to this definition">¶</a></dt>
+<dd><p>the major of user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.intro">
+<span class="sig-name descname"><span class="pre">intro</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=255),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.intro" title="Permalink to this definition">¶</a></dt>
+<dd><p>a short paragraph of self-introduction written by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.first">
+<span class="sig-name descname"><span class="pre">first</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=45),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>the first programming language that the user has (sorted by preference)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.second">
+<span class="sig-name descname"><span class="pre">second</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=45),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.second" title="Permalink to this definition">¶</a></dt>
+<dd><p>the second programming language that the user has (sorted by preference)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.third">
+<span class="sig-name descname"><span class="pre">third</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=45),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.third" title="Permalink to this definition">¶</a></dt>
+<dd><p>the third programming language that the user has (sorted by preference)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.server">
+<span class="sig-name descname"><span class="pre">server</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=255),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.server" title="Permalink to this definition">¶</a></dt>
+<dd><p>the server-side frameworks that the user has</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.client">
+<span class="sig-name descname"><span class="pre">client</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=255),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>the client-side frameworks that the user has</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.frontendSkillScore">
+<span class="sig-name descname"><span class="pre">frontendSkillScore</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">Integer(),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.frontendSkillScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>a score measuring the frontend skills evaluated by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.backendSkillScore">
+<span class="sig-name descname"><span class="pre">backendSkillScore</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">Integer(),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.backendSkillScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>a score measuring the frontend skills evaluated by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.open">
+<span class="sig-name descname"><span class="pre">open</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">Integer(),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>1 if this student is not yet in a group (so it will show in the student list)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Student.Student.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Column(None,</span> <span class="pre">String(length=255),</span> <span class="pre">table=None)</span></em><a class="headerlink" href="#Student.Student.password" title="Permalink to this definition">¶</a></dt>
+<dd><p>password of this user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.createUser">
+<span class="sig-name descname"><span class="pre">createUser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.createUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method allows to create a new user and commit to database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(bool) True if the creation and commitment succeed, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.getUserInfo">
+<span class="sig-name descname"><span class="pre">getUserInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.getUserInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method outputs all the information of this user except for the password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(dict) a dictionary including all the information where each key corresponds to an attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.editUserInfo">
+<span class="sig-name descname"><span class="pre">editUserInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">major</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intro</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.editUserInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method updates the information of the user and commits to the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – the query used to update the columns in the database of Student</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – name of the user</p></li>
+<li><p><strong>email</strong> (<em>str</em>) – email address of the user</p></li>
+<li><p><strong>year</strong> (<em>str</em>) – the current year that the user is in</p></li>
+<li><p><strong>major</strong> (<em>str</em>) – the major of user</p></li>
+<li><p><strong>intro</strong> (<em>str</em>) – a short paragraph of self-introduction written by the user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if the update and commitment succeed, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.editProgrammingLanguage">
+<span class="sig-name descname"><span class="pre">editProgrammingLanguage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">third</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.editProgrammingLanguage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method updates the languages used by the user and commits to the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – the query used to update the columns in the database of Student</p></li>
+<li><p><strong>first</strong> (<em>str</em>) – the first programming language that the user has (sorted by preference)</p></li>
+<li><p><strong>second</strong> (<em>str</em>) – the second programming language that the user has (sorted by preference)</p></li>
+<li><p><strong>third</strong> (<em>str</em>) – the third programming language that the user has (sorted by preference)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if the update and commitment succeed, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.editUserRating">
+<span class="sig-name descname"><span class="pre">editUserRating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frontendSkillScore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backendSkillScore</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.editUserRating" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method updates the frontend and backend skill-scores and commits to the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – the query used to update the columns in the database of Student</p></li>
+<li><p><strong>frontendSkillScore</strong> (<em>int</em>) – a score measuring the frontend skills evaluated by the user</p></li>
+<li><p><strong>backendSkillScore</strong> (<em>int</em>) – a score measuring the frontend skills evaluated by the user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if the update and commitment succeed, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.editFrameworks">
+<span class="sig-name descname"><span class="pre">editFrameworks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serverSide</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clientSide</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.editFrameworks" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method updates the frontend and backend frameworks of the user and commits to the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – the query used to update the columns in the database of Student</p></li>
+<li><p><strong>server</strong> (<em>str</em>) – server-side frameworks that the user has</p></li>
+<li><p><strong>client</strong> (<em>str</em>) – client-side frameworks that the user has</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if the update and commitment succeed, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.getAllStudentsInfo">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">getAllStudentsInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.getAllStudentsInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gives the information of all the students.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(list(dict)) the information of all the students.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is static for class Student.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.getAllIndividualRequests">
+<span class="sig-name descname"><span class="pre">getAllIndividualRequests</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.getAllIndividualRequests" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns a list of dictionaries received by the user, where each dictionary represents an individual
+request which contains the request id and the sender’s information. The list is ordered by increasing order of status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(list(dict)) a list of dictionaries where each dictionary contains the request id and sender’s information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.sendIndividualRequest">
+<span class="sig-name descname"><span class="pre">sendIndividualRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targetStudentId</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.sendIndividualRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method creates an individual request (to a student) and tries to commit to the corresponding database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>targetStudentId</strong> (<em>int</em>) – the id of the student to whom this request is sent to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if the request is committed to the database successfully, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.sendGroupRequest">
+<span class="sig-name descname"><span class="pre">sendGroupRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targetGroupId</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.sendGroupRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method creates a group request (to a group) and tries to commit to the corresponding database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>targetGroupId</strong> (<em>int</em>) – the id of the group to whom this request is sent to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(bool) True if the request is committed to the database successfully, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.sortIndividuals">
+<span class="sig-name descname"><span class="pre">sortIndividuals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allStudents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.sortIndividuals" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method takes the information of all the other students and compare their information with the (self) user,
+based on the languages they use, the frontend and backend frameworks they use. For each other student, this
+method gives a matching score. Finally, it returns a list of dictionaries where each dictionary represents the
+information of a student sorted by their matching scores with the (self) user decreasingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>allStudents</strong> (<em>list</em><em>(</em><em>dict</em><em>)</em>) – the information of all the students.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of dictionaries where each dictionary represents the information of a student sorted
+by their matching scores with the (self) user decreasingly.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(list(dict))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Student.Student.searchByName">
+<span class="sig-name descname"><span class="pre">searchByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allStudents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Student.Student.searchByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns all the students with status open=1 in the order of their matching score with the (self)
+user deccided by self.sortIndividuals().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>allStudents</strong> (<em>list</em><em>(</em><em>dict</em><em>)</em>) – the information of all the students.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of dictionaries where each dictionary represents the information of a student sorted
+by their matching scores with the (self) user decreasingly.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(list(dict))</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Request.html" class="btn btn-neutral float-left" title="Request module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="User.html" class="btn btn-neutral float-right" title="User module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, BugMakers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
