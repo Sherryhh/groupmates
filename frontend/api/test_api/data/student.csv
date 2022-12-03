@@ -1,0 +1,11 @@
+"id";"name";"email";"year";"major";"intro";"first";"second";"third";"server";"client";"frontendSkillScore";"backendSkillScore";"open";"groupId";"password"
+1;"Anna";"anna@g.ucla.edu";"Senior";"Math";"I am the best student!";"Java";"C++";"Python";"[""Flask""]";"[""React""]";3;3;1;1;123456
+3;"Emily";"emily2020@g.ucla.edu";"Sophomore";"Computer Science";"Hi, this is Emily!";"Python";"Java";"C++";"[""Flask""]";"[""React""]";5;5;1;0;123456
+4;"Sherry";"sherry@g.ucla.edu";"Sophomore";"Computer Science";"";"Python";"Java";"C++";"[""Flask""]";"[""React""]";5;5;1;0;123456
+5;"TestIndividualRequest";"test@g.ucla.edu";"Freshman";"Computer Science";"";"Java";"C++";"Python";"[""Flask""]";"[""React""]";3;2;0;0;123456
+6;"TestGroupRequest";"test@g.ucla.edu";"Freshman";"Computer Science";"";"Python";"Java";"C++";"[""Flask""]";"[""React""]";4;4;0;0;123456
+8;"Emma";"emma@g.ucla.edu";"Senior";"Computer Science";"Hello";"Java";"C++";"Python";"[""Flask""]";"[""React""]";4;5;1;0;123456
+9;"TestUser1";"test@g.ucla.edu";"Senior";"Computer Science";"Hello World";"Python";"Java";"C++";"[""Flask""]";"[""React""]";5;5;0;3;123456
+10;"TestUser2";"test2@g.ucla.edu";"Senior";"Computer Science";"Hello World";"Python";"C++";"Java";"[""Flask""]";"[""React""]";5;5;0;3;123456
+11;"TestUser3";"test3@g.ucla.edu";"Senior";"Computer Science";"Hello World";"Python";"C";"C++";"[""Flask""]";"[""React""]";5;5;1;0;123456
+12;"TestUser4";"test3@g.ucla.edu";"Senior";"Computer Science";"Hello World";"Python";"C";"C++";"[""Flask""]";"[""React""]";5;5;1;0;123456
