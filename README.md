@@ -47,7 +47,7 @@ python3 run.py
 
 4. Open the website
 ```
-http://localhost:7001
+http://localhost:7001/login
 ```
 
 ## Citation
