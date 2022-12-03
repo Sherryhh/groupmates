@@ -175,6 +175,14 @@ def test_searchByName(client: FlaskClient):
     assert data
     assert any(d['name'] == 'Anna' for d in data)
 
+    response = client.get('/api/v1/searchByName', query_string={
+        'userId': 3,
+        'target': 'Lucy'
+    })
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert len(data) == 0
+
 
 def test_sortIndividuals(client: FlaskClient):
     response = client.get('/api/v1/sortIndividuals', query_string={
@@ -320,6 +328,7 @@ def test_SendAndCheckIndividualRequest(client: FlaskClient):
     assert response.status_code == 200
     data = json.loads(response.get_data(as_text=True))
     assert any(d['receiver'] == 12 for d in data)
+    assert any(d['sender'] == 11 for d in data)
 
 
 '''

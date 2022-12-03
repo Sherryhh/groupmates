@@ -334,6 +334,8 @@ we want to ensure searchByName() perform correctly with a status_code = 200
 
 ### Input
 
+This test case verifies the situation when there is user has the target prefix.
+
 ```
     response = client.get('/api/v1/searchByName', query_string={
         'userId': 3,
@@ -348,6 +350,27 @@ we want to ensure searchByName() perform correctly with a status_code = 200
     data = json.loads(response.get_data(as_text=True))
     assert data
     assert any(d['name'] == 'Anna' for d in data)
+```
+
+
+
+### Another input:
+
+This test case verifies the situation when there is no user has the target prefix.
+
+```
+    response = client.get('/api/v1/searchByName', query_string={
+        'userId': 3,
+        'target': 'Lucy'
+    })
+```
+
+### Output
+
+```
+    assert response.status_code == 200
+    data = json.loads(response.get_data(as_text=True))
+    assert len(data) == 0
 ```
 
 The output matches our expectation. 
@@ -661,6 +684,10 @@ The output matches our expectation.
 
 ## TEST #22: test_changeGroupName()
 
+### Actual use case scenario: 
+
+User A change the group name and other group member B check the group information and see the updates
+
 ### Objective
 
 ```
@@ -679,6 +706,7 @@ we want to ensure changeGroupName() perform correctly with a status_code = 200 a
     })
     # ===========================================================
     #                        followed by
+    # ===========================================================
     response = client.get('/api/v1/getGroupInfo', query_string={
         'userId': 9
     })
@@ -690,6 +718,7 @@ we want to ensure changeGroupName() perform correctly with a status_code = 200 a
     assert response.status_code == 200
     # ===========================================================
     #                        followed by
+    # ===========================================================
     assert response.status_code == 200
     data = json.loads(response.get_data(as_text=True))
     assert data
@@ -701,6 +730,10 @@ The output matches our expectation.
 
 
 ## TEST #23: test_SendAndCheckIndividualRequest()
+
+### Actual use case scenario: 
+
+User A send an individual request to user B and user B should be able to see the request.
 
 ### Objective
 
@@ -717,6 +750,7 @@ we want to ensure sendIndividualRequest() perform correctly with a status_code =
     })
     # ===========================================================
     #                        followed by
+    # ===========================================================
     response = client.get('/api/v1/checkRequest', query_string={
         'sender': 11,
     })
@@ -728,6 +762,7 @@ we want to ensure sendIndividualRequest() perform correctly with a status_code =
     assert response.status_code == 200
     # ===========================================================
     #                        followed by
+    # ===========================================================
     assert response.status_code == 200
     data = json.loads(response.get_data(as_text=True))
     assert any(d['receiver'] == 12 for d in data)
@@ -738,6 +773,10 @@ The output matches our expectation.
 
 
 ## TEST #24: test_sendGroupRequest_handleRequest()
+
+## Actual use case scenario: 
+
+User A send a join group request to group B. Group member in group B accept the request and check for the updated group information
 
 ### Objective
 
